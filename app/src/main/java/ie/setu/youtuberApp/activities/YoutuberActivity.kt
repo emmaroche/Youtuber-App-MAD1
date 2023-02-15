@@ -1,17 +1,18 @@
-package ie.setu.youtuber_app.activities
+package ie.setu.youtuberApp.activities
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import ie.setu.youtuber_app.databinding.ActivityYoutuberBinding
-import ie.setu.youtuber_app.models.YoutuberModel
-import timber.log.Timber
+import ie.setu.youtuberApp.main.MainApp
+import ie.setu.youtuberApp.models.YoutuberModel
+import ie.setu.youtuberApp.databinding.ActivityYoutuberBinding
 import timber.log.Timber.i
 
 class YoutuberActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityYoutuberBinding
-    var youtuber = YoutuberModel()
-    val youtubers = ArrayList<YoutuberModel>()
+    private var youtuber = YoutuberModel()
+    private lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,18 +20,22 @@ class YoutuberActivity : AppCompatActivity() {
         binding = ActivityYoutuberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
+        app = application as MainApp
 
         i("YouTuber Activity started...")
 
-        binding.btnAdd.setOnClickListener() {
+        binding.btnAdd.setOnClickListener {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
-            if (youtuber.name.isNotEmpty() && youtuber.channelName.isNotEmpty()) {
-                i("add Button Pressed: $youtuber.name")
-                i("add Button Pressed: $youtuber.channelName")
-                youtubers.add(youtuber.copy())
-                i("YouTubers $youtubers")
+            if (youtuber.name.isNotEmpty()) {
+
+                app.youtubers.add(youtuber.copy())
+                i("add Button Pressed: $youtuber")
+                for (i in app.youtubers.indices) {
+                    i("YouTuber[$i]:${this.app.youtubers[i]}")
+                }
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
@@ -38,7 +43,5 @@ class YoutuberActivity : AppCompatActivity() {
                     .show()
             }
         }
-
-
     }
 }
