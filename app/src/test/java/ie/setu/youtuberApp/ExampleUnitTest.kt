@@ -1,4 +1,4 @@
-package ie.setu.youtuber_app
+package ie.setu.youtuberApp
 
 import org.junit.Test
 
