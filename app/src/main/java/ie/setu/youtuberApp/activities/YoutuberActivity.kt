@@ -36,6 +36,7 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber = intent.extras?.getParcelable("youtuber_edit")!!
             binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
+            binding.btnAdd.setText(R.string.button_saveYoutuber)
         }
 
         binding.btnAdd.setOnClickListener() {
