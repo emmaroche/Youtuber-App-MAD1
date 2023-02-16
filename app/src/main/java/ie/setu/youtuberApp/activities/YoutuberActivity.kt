@@ -34,7 +34,7 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
             if (youtuber.name.isNotEmpty()) {
-                app.youtubers.add(youtuber.copy())
+                app.youtubers.create(youtuber.copy())
                 setResult(RESULT_OK)
                 finish()
             }

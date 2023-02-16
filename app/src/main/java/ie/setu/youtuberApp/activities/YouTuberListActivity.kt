@@ -30,7 +30,7 @@ class YouTuberListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers)
+        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,7 +54,7 @@ class YouTuberListActivity : AppCompatActivity() {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.youtubers.size)
+                notifyItemRangeChanged(0,app.youtubers.findAll().size)
             }
         }
 }
