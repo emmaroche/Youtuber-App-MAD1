@@ -4,18 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ie.setu.youtuberApp.R
+import ie.setu.youtuberApp.adapters.YoutuberAdapter
 import ie.setu.youtuberApp.main.MainApp
-import ie.setu.youtuberApp.models.YoutuberModel
 import ie.setu.youtuberApp.databinding.ActivityYouTuberListBinding
-import ie.setu.youtuberApp.databinding.CardYoutuberBinding
+
 
 class YouTuberListActivity : AppCompatActivity() {
 
@@ -33,7 +30,7 @@ class YouTuberListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = YouTuberAdapter(app.youtubers)
+        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,31 +57,4 @@ class YouTuberListActivity : AppCompatActivity() {
                 notifyItemRangeChanged(0,app.youtubers.size)
             }
         }
-}
-
-class YouTuberAdapter constructor(private var youtubers: List<YoutuberModel>) :
-    RecyclerView.Adapter<YouTuberAdapter.MainHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        val binding = CardYoutuberBinding
-            .inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return MainHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val youtuber = youtubers[holder.adapterPosition]
-        holder.bind(youtuber)
-    }
-
-    override fun getItemCount(): Int = youtubers.size
-
-    class MainHolder(private val binding : CardYoutuberBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(youtuber: YoutuberModel) {
-            binding.youtuberName.text = youtuber.name
-            binding.youtuberChannelName.text = youtuber.channelName
-        }
-    }
 }
