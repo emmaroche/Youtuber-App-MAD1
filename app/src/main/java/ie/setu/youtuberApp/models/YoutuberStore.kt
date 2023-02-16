@@ -6,4 +6,6 @@ interface YoutuberStore {
 
     fun create(youtuber: YoutuberModel)
 
+    fun update(youtuber: YoutuberModel)
+
 }

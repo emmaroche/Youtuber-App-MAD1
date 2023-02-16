@@ -2,6 +2,12 @@ package ie.setu.youtuberApp.models
 
 import timber.log.Timber.i
 
+var lastId = 0L
+
+internal fun getId(): Long {
+    return lastId++
+}
+
 class YoutuberMemStore : YoutuberStore {
 
     private val youtubers = ArrayList<YoutuberModel>()
@@ -11,11 +17,21 @@ class YoutuberMemStore : YoutuberStore {
     }
 
     override fun create(youtuber: YoutuberModel) {
+        youtuber.id = getId()
         youtubers.add(youtuber)
         logAll()
     }
 
+    override fun update(youtuber: YoutuberModel) {
+        var foundYoutuber: YoutuberModel? = youtubers.find { p -> p.id == youtuber.id }
+        if (foundYoutuber != null) {
+            foundYoutuber.name = youtuber.name
+            foundYoutuber.channelName = youtuber.channelName
+            logAll()
+        }
+    }
+
     private fun logAll() {
-        youtubers.forEach{ i("$it") }
+        youtubers.forEach { i("$it") }
     }
 }
