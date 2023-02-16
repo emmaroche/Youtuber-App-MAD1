@@ -16,6 +16,7 @@ class YoutuberActivity : AppCompatActivity() {
     private lateinit var binding: ActivityYoutuberBinding
     private var youtuber = YoutuberModel()
     private lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,23 +31,40 @@ class YoutuberActivity : AppCompatActivity() {
 
         i("YouTuber Activity started...")
 
-        binding.btnAdd.setOnClickListener {
+        if (intent.hasExtra("youtuber_edit")) {
+            edit = true
+            youtuber = intent.extras?.getParcelable("youtuber_edit")!!
+            binding.youtuberName.setText(youtuber.name)
+            binding.youtuberChannelName.setText(youtuber.channelName)
+        }
+
+        binding.btnAdd.setOnClickListener() {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
-            if (youtuber.name.isNotEmpty()) {
-                app.youtubers.create(youtuber.copy())
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
-                Snackbar.make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+            if (youtuber.name.isEmpty()) {
+                Snackbar.make(it,R.string.error_Text, Snackbar.LENGTH_LONG)
                     .show()
+
+            } else {
+                if (edit) {
+                    app.youtubers.update(youtuber.copy())
+                    i("edit Button Pressed: $youtuber")
+                    setResult(RESULT_OK)
+                    finish()
+                } else {
+                    app.youtubers.create(youtuber.copy())
+                    i("add Button Pressed: $youtuber")
+                    setResult(RESULT_OK)
+                    finish()
+                }
             }
+
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 

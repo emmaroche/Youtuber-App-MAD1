@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.setu.youtuberApp.databinding.CardYoutuberBinding
 import ie.setu.youtuberApp.models.YoutuberModel
 
-
-class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>) :
+interface YoutuberListener {
+    fun onYoutuberClick(youtuber: YoutuberModel)
+}
+class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  private val listener: YoutuberListener) :
     RecyclerView.Adapter<YoutuberAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -19,7 +21,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>) :
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val youtuber = youtubers[holder.adapterPosition]
-        holder.bind(youtuber)
+        holder.bind(youtuber, listener)
     }
 
     override fun getItemCount(): Int = youtubers.size
@@ -27,9 +29,11 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>) :
     class MainHolder(private val binding : CardYoutuberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(youtuber: YoutuberModel) {
+        fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
             binding.youtuberName.text = youtuber.name
             binding.youtuberChannelName.text = youtuber.channelName
+            binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
+
         }
     }
 }

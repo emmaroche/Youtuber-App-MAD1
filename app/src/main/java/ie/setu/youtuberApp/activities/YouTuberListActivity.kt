@@ -10,11 +10,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.adapters.YoutuberAdapter
+import ie.setu.youtuberApp.adapters.YoutuberListener
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.databinding.ActivityYouTuberListBinding
+import ie.setu.youtuberApp.models.YoutuberModel
 
 
-class YouTuberListActivity : AppCompatActivity() {
+class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
+
 
     private lateinit var app: MainApp
     private lateinit var binding: ActivityYouTuberListBinding
@@ -30,7 +33,7 @@ class YouTuberListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll())
+        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,6 +52,23 @@ class YouTuberListActivity : AppCompatActivity() {
     }
 
     private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.youtubers.findAll().size)
+            }
+        }
+
+    override fun onYoutuberClick(youtuber: YoutuberModel) {
+        val launcherIntent = Intent(this, YoutuberActivity::class.java)
+        launcherIntent.putExtra("youtuber_edit", youtuber)
+        getClickResult.launch(launcherIntent)
+
+    }
+
+    private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
