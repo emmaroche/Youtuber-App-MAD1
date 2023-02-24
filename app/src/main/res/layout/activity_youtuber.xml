@@ -39,6 +39,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/basicInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="YouTuber Information"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
                 <EditText
                     android:id="@+id/youtuberName"
                     android:layout_width="match_parent"
@@ -51,7 +60,7 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/youtuberChannelName"
@@ -64,7 +73,21 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ratingTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="YouTuber Rating"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <NumberPicker
+                    android:id="@+id/youtuberRating"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
 
                 <Button
                     android:id="@+id/btnAdd"
@@ -78,6 +101,9 @@
                     android:text="@string/button_addYoutuber"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
+
+
+
             </LinearLayout>
         </ScrollView>
 
