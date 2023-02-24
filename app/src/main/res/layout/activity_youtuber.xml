@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="YouTuber Information"
+                    android:text="YouTuber's Information"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -76,11 +76,27 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/dobTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="YouTuber's Date of Birth"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <DatePicker
+                    android:id="@+id/youtuberDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>
+
+                <TextView
                     android:id="@+id/ratingTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="YouTuber Rating"
+                    android:text="Rate this YouTuber (1 -10)"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -99,7 +115,7 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addYoutuber"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
 
