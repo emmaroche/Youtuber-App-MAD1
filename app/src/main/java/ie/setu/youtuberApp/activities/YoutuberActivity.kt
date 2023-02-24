@@ -3,8 +3,6 @@ package ie.setu.youtuberApp.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.NumberPicker
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.youtuberApp.R
@@ -12,6 +10,7 @@ import ie.setu.youtuberApp.databinding.ActivityYoutuberBinding
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
+
 
 class YoutuberActivity : AppCompatActivity() {
 
@@ -23,6 +22,7 @@ class YoutuberActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         binding = ActivityYoutuberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -33,14 +33,14 @@ class YoutuberActivity : AppCompatActivity() {
 
         i("YouTuber Activity started...")
 
-
-
         if (intent.hasExtra("youtuber_edit")) {
             edit = true
             youtuber = intent.extras?.getParcelable("youtuber_edit")!!
             binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
             binding.youtuberRating.value = youtuber.youtuberRating
+//            youtuber.dob = binding.youtuberDOB.toString()
+            setUpNumberPicker()
             binding.btnAdd.setText(R.string.button_saveYoutuber)
         }
 
@@ -48,6 +48,9 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
             youtuber.youtuberRating = binding.youtuberRating.value
+//            youtuber.dob = binding.youtuberDOB.toString()
+
+
             if (youtuber.name.isEmpty()) {
                 Snackbar.make(it,R.string.error_Text, Snackbar.LENGTH_LONG)
                     .show()
@@ -67,6 +70,18 @@ class YoutuberActivity : AppCompatActivity() {
             }
 
         }
+
+
+//        val datePicker = findViewById<DatePicker>(R.id.youtuberDOB)
+//        val today = Calendar.getInstance()
+//        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+//            today.get(Calendar.DAY_OF_MONTH)
+//
+//        ) { view, year, month, day ->
+//            val month = month + 1
+//            val msg = "You Selected: $day/$month/$year"
+//            Toast.makeText(this@YoutuberActivity, msg, Toast.LENGTH_SHORT).show()
+//        }
 
         setUpNumberPicker()
     }
@@ -93,6 +108,7 @@ class YoutuberActivity : AppCompatActivity() {
 
     private fun setUpNumberPicker() {
         val numberPicker = binding.youtuberRating
+
         numberPicker.minValue = 1
         numberPicker.maxValue = 10
         numberPicker.wrapSelectorWheel = false
@@ -102,10 +118,5 @@ class YoutuberActivity : AppCompatActivity() {
 //        }
 
 
-
-
     }
-
-
-
 }
