@@ -23,12 +23,17 @@ class YoutuberMemStore : YoutuberStore {
     }
 
     override fun update(youtuber: YoutuberModel) {
-        var foundYoutuber: YoutuberModel? = youtubers.find { p -> p.id == youtuber.id }
+        val foundYoutuber: YoutuberModel? = youtubers.find { p -> p.id == youtuber.id }
         if (foundYoutuber != null) {
             foundYoutuber.name = youtuber.name
             foundYoutuber.channelName = youtuber.channelName
+            foundYoutuber.youtuberRating = youtuber.youtuberRating
             logAll()
         }
+    }
+
+    override fun delete(youtuber: YoutuberModel) {
+        youtubers.remove(youtuber)
     }
 
     private fun logAll() {

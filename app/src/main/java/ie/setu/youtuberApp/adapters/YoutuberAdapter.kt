@@ -12,6 +12,7 @@ interface YoutuberListener {
 class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  private val listener: YoutuberListener) :
     RecyclerView.Adapter<YoutuberAdapter.MainHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardYoutuberBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +25,10 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
         holder.bind(youtuber, listener)
     }
 
+
+
     override fun getItemCount(): Int = youtubers.size
+
 
     class MainHolder(private val binding : CardYoutuberBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,6 +36,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
             binding.youtuberName.text = youtuber.name
             binding.youtuberChannelName.text = youtuber.channelName
+            binding.youtuberRating.text = youtuber.youtuberRating.toString()
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
 
         }

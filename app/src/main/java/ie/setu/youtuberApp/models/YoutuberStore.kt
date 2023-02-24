@@ -8,4 +8,6 @@ interface YoutuberStore {
 
     fun update(youtuber: YoutuberModel)
 
+    fun delete(youtuber: YoutuberModel)
+
 }
