@@ -6,4 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class YoutuberModel(var id: Long = 0,
                          var name: String = "",
-                         var channelName: String = "") : Parcelable
+                         var channelName: String = "",
+                         var youtuberRating: Int = 0) : Parcelable
