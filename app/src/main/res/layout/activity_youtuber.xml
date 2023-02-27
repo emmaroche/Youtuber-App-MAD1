@@ -75,35 +75,65 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/dobTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="YouTuber's Date of Birth"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/dobTextView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:text="YouTuber's Date of Birth"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <DatePicker
-                    android:id="@+id/youtuberDOB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:datePickerMode="spinner"
-                    android:calendarViewShown="false"/>
+<!--                <DatePicker-->
+<!--                    android:id="@+id/youtuberDOB"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:datePickerMode="spinner"-->
+<!--                    android:calendarViewShown="false"/>-->
 
-                <TextView
-                    android:id="@+id/ratingTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Rate this YouTuber (1 -10)"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/addImageView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:text="Add image"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <NumberPicker
-                    android:id="@+id/youtuberRating"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/icon2"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:contentDescription="@string/change_youtuber_image"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btnAddImage"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:background="@color/colorAccent"-->
+<!--                    android:paddingTop="8dp"-->
+<!--                    android:paddingBottom="8dp"-->
+<!--                    android:stateListAnimator="@null"-->
+<!--                    android:text="Add image"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/ratingTextView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:text="Rate this YouTuber (1 -10)"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"/>-->
+
+<!--                <NumberPicker-->
+<!--                    android:id="@+id/youtuberRating"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="100dp" />-->
 
                 <Button
                     android:id="@+id/btnAdd"

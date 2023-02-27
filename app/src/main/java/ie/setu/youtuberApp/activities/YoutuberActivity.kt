@@ -22,7 +22,6 @@ class YoutuberActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityYoutuberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,16 +37,16 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber = intent.extras?.getParcelable("youtuber_edit")!!
             binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
-            binding.youtuberRating.value = youtuber.youtuberRating
+//            binding.youtuberRating.value = youtuber.youtuberRating
 //            youtuber.dob = binding.youtuberDOB.toString()
-            setUpNumberPicker()
+//            setUpNumberPicker()
             binding.btnAdd.setText(R.string.button_saveYoutuber)
         }
 
         binding.btnAdd.setOnClickListener {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
-            youtuber.youtuberRating = binding.youtuberRating.value
+//            youtuber.youtuberRating = binding.youtuberRating.value
 //            youtuber.dob = binding.youtuberDOB.toString()
 
 
@@ -59,18 +58,16 @@ class YoutuberActivity : AppCompatActivity() {
                 if (edit) {
                     app.youtubers.update(youtuber.copy())
                     i("edit Button Pressed: $youtuber")
-                    setResult(RESULT_OK)
-                    finish()
                 } else {
                     app.youtubers.create(youtuber.copy())
                     i("add Button Pressed: $youtuber")
-                    setResult(RESULT_OK)
-                    finish()
                 }
             }
 
-        }
+            setResult(RESULT_OK)
+            finish()
 
+        }
 
 //        val datePicker = findViewById<DatePicker>(R.id.youtuberDOB)
 //        val today = Calendar.getInstance()
@@ -83,40 +80,38 @@ class YoutuberActivity : AppCompatActivity() {
 //            Toast.makeText(this@YoutuberActivity, msg, Toast.LENGTH_SHORT).show()
 //        }
 
-        setUpNumberPicker()
+//        setUpNumberPicker()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
         if (edit) menu.getItem(0).isVisible = true
-
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
-            R.id.item_cancel -> { finish() }
-
-            R.id.delete -> {
+            R.id.item_delete -> {
                 app.youtubers.delete(youtuber)
+                finish()
+            }
+            R.id.item_cancel -> {
                 finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setUpNumberPicker() {
-        val numberPicker = binding.youtuberRating
+//    private fun setUpNumberPicker() {
+//        val numberPicker = binding.youtuberRating
+//
+//        numberPicker.minValue = 1
+//        numberPicker.maxValue = 10
+//        numberPicker.wrapSelectorWheel = false
+////        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+////            val text = "Changed from $oldVal to $newVal"
+////            Toast.makeText(this@YoutuberActivity, text, Toast.LENGTH_SHORT).show()
+////        }
+//    }
 
-        numberPicker.minValue = 1
-        numberPicker.maxValue = 10
-        numberPicker.wrapSelectorWheel = false
-//        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-//            val text = "Changed from $oldVal to $newVal"
-//            Toast.makeText(this@YoutuberActivity, text, Toast.LENGTH_SHORT).show()
-//        }
-
-
-    }
 }

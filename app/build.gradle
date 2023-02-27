@@ -49,4 +49,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.github.ajalt:timberkt:1.5.1'
+    implementation "com.google.code.gson:gson:2.8.9"
+    implementation 'com.thoughtworks.xstream:xstream:1.4.19'
+    implementation'org.codehaus.jettison:jettison:1.5.2'
+
 }

@@ -36,7 +36,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
             binding.youtuberName.text = youtuber.name
             binding.youtuberChannelName.text = youtuber.channelName
-            binding.youtuberRating.text = youtuber.youtuberRating.toString()
+//            binding.youtuberRating.text = youtuber.youtuberRating.toString()
 //            binding.youtuberDOB.text = youtuber.dob.toString()
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
 
