@@ -1,12 +1,17 @@
 package ie.setu.youtuberApp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.ActivityYoutuberBinding
+import ie.setu.youtuberApp.helpers.showImagePicker
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
@@ -15,6 +20,7 @@ import timber.log.Timber.i
 class YoutuberActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityYoutuberBinding
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private var youtuber = YoutuberModel()
     private lateinit var app: MainApp
     private var edit = false
@@ -37,18 +43,22 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber = intent.extras?.getParcelable("youtuber_edit")!!
             binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
-//            binding.youtuberRating.value = youtuber.youtuberRating
+            binding.youtuberRating.value = youtuber.youtuberRating
 //            youtuber.dob = binding.youtuberDOB.toString()
 //            setUpNumberPicker()
             binding.btnAdd.setText(R.string.button_saveYoutuber)
+            Picasso.get()
+                .load(youtuber.youtuberImage)
+                .resize(900,800)
+                .into(binding.youtuberImage)
+
         }
 
         binding.btnAdd.setOnClickListener {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
-//            youtuber.youtuberRating = binding.youtuberRating.value
+            youtuber.youtuberRating = binding.youtuberRating.value
 //            youtuber.dob = binding.youtuberDOB.toString()
-
 
             if (youtuber.name.isEmpty()) {
                 Snackbar.make(it,R.string.error_Text, Snackbar.LENGTH_LONG)
@@ -58,14 +68,15 @@ class YoutuberActivity : AppCompatActivity() {
                 if (edit) {
                     app.youtubers.update(youtuber.copy())
                     i("edit Button Pressed: $youtuber")
+                    setResult(RESULT_OK)
+                    finish()
                 } else {
                     app.youtubers.create(youtuber.copy())
                     i("add Button Pressed: $youtuber")
+                    setResult(RESULT_OK)
+                    finish()
                 }
             }
-
-            setResult(RESULT_OK)
-            finish()
 
         }
 
@@ -80,7 +91,14 @@ class YoutuberActivity : AppCompatActivity() {
 //            Toast.makeText(this@YoutuberActivity, msg, Toast.LENGTH_SHORT).show()
 //        }
 
-//        setUpNumberPicker()
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+
+        registerImagePickerCallback()
+
+        setUpNumberPicker()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,16 +120,35 @@ class YoutuberActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-//    private fun setUpNumberPicker() {
-//        val numberPicker = binding.youtuberRating
-//
-//        numberPicker.minValue = 1
-//        numberPicker.maxValue = 10
-//        numberPicker.wrapSelectorWheel = false
-////        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-////            val text = "Changed from $oldVal to $newVal"
-////            Toast.makeText(this@YoutuberActivity, text, Toast.LENGTH_SHORT).show()
-////        }
-//    }
+    private fun setUpNumberPicker() {
+        val numberPicker = binding.youtuberRating
 
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 10
+        numberPicker.wrapSelectorWheel = false
+//        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+//            val text = "Changed from $oldVal to $newVal"
+//            Toast.makeText(this@YoutuberActivity, text, Toast.LENGTH_SHORT).show()
+//        }
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            youtuber.youtuberImage = result.data!!.data!!
+                            Picasso.get()
+                                .load(youtuber.youtuberImage)
+                                .resize(900,800)
+                                .into(binding.youtuberImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
 }

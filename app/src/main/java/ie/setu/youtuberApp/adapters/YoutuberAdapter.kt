@@ -3,6 +3,7 @@ package ie.setu.youtuberApp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ie.setu.youtuberApp.databinding.CardYoutuberBinding
 import ie.setu.youtuberApp.models.YoutuberModel
 
@@ -25,10 +26,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
         holder.bind(youtuber, listener)
     }
 
-
-
     override fun getItemCount(): Int = youtubers.size
-
 
     class MainHolder(private val binding : CardYoutuberBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,10 +34,13 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
             binding.youtuberName.text = youtuber.name
             binding.youtuberChannelName.text = youtuber.channelName
-//            binding.youtuberRating.text = youtuber.youtuberRating.toString()
+            binding.youtuberRating.text = youtuber.youtuberRating.toString()
+            Picasso.get().load(youtuber.youtuberImage).into(binding.displayImage)
 //            binding.youtuberDOB.text = youtuber.dob.toString()
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
 
         }
     }
+
+
 }
