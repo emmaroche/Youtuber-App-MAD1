@@ -1,6 +1,5 @@
 package ie.setu.youtuberApp.models
 
-import android.content.Context
 import timber.log.Timber.i
 
 var lastId = 0L
@@ -9,7 +8,7 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class YoutuberMemStore(applicationContext: Context) : YoutuberStore {
+class YoutuberMemStore : YoutuberStore {
 
     private val youtubers = ArrayList<YoutuberModel>()
 
@@ -28,14 +27,17 @@ class YoutuberMemStore(applicationContext: Context) : YoutuberStore {
         if (foundYoutuber != null) {
             foundYoutuber.name = youtuber.name
             foundYoutuber.channelName = youtuber.channelName
-//            foundYoutuber.youtuberRating = youtuber.youtuberRating
+            foundYoutuber.youtuberRating = youtuber.youtuberRating
+            foundYoutuber.youtuberImage = youtuber.youtuberImage
 //            foundYoutuber.dob = youtuber.dob
             logAll()
         }
     }
 
-    override fun delete(youtuber: YoutuberModel){
+    override fun delete(youtuber: YoutuberModel) {
+        youtuber.id = getId()
         youtubers.remove(youtuber)
+        logAll()
     }
 
     private fun logAll() {

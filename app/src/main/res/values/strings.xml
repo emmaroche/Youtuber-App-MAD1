@@ -2,13 +2,14 @@
     <string name="app_name">Youtuber-App</string>
     <string name="button_addYoutuber">Add YouTuber</string>
     <string name="button_saveYoutuber">Save YouTuber</string>
+    <string name="button_addYoutuberImage">Add Image</string>
     <string name="hint_youtuberName">YouTuber Name</string>
     <string name="hint_youtuberChannelName">YouTuber Channel Name</string>
     <string name="menu_addYouTuber">Add</string>
     <string name="menu_deleteYoutuber">Delete</string>
     <string name="menu_cancelAdd">Cancel</string>
     <string name="error_Text">Please enter a YouTubers name</string>
-    <string name="button_addYoutuberImage"> Add Image </string>
     <string name="select_youtuber_image">Select YouTuber image</string>
     <string name="change_youtuber_image">Change YouTuber image</string>
+    <string name="display_youtuber_image">YouTuber image</string>
 </resources>

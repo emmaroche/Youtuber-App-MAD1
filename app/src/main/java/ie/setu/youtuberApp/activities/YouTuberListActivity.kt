@@ -2,17 +2,17 @@ package ie.setu.youtuberApp.activities
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.adapters.YoutuberAdapter
 import ie.setu.youtuberApp.adapters.YoutuberListener
-import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.databinding.ActivityYouTuberListBinding
+import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 
 
@@ -34,6 +34,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(),this)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,4 +78,8 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 notifyItemRangeChanged(0,app.youtubers.findAll().size)
             }
         }
+
+
+
+
 }
