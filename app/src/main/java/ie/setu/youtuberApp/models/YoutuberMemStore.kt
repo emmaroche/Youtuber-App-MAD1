@@ -29,7 +29,7 @@ class YoutuberMemStore : YoutuberStore {
             foundYoutuber.channelName = youtuber.channelName
             foundYoutuber.youtuberRating = youtuber.youtuberRating
             foundYoutuber.youtuberImage = youtuber.youtuberImage
-//            foundYoutuber.dob = youtuber.dob
+            foundYoutuber.dob = youtuber.dob
             logAll()
         }
     }
