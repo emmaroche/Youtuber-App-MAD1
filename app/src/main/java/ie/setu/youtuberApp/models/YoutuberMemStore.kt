@@ -35,7 +35,7 @@ class YoutuberMemStore : YoutuberStore {
     }
 
     override fun delete(youtuber: YoutuberModel) {
-        youtuber.id = getId()
+        logAll()
         youtubers.remove(youtuber)
         logAll()
     }

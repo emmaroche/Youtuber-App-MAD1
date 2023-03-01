@@ -38,7 +38,6 @@
                 android:id="@+id/youtuberName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:textSize="30sp"
                 tools:text="A Title" />
 
@@ -46,7 +45,6 @@
                 android:id="@+id/youtuberChannelName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/youtuberName"
                 tools:text="A Description" />
 
 
@@ -54,7 +52,6 @@
             android:id="@+id/youtuberRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/youtuberName"
             tools:text="A rating" />
 
 <!--        <TextView-->
@@ -65,8 +62,6 @@
 <!--            tools:text="DOB" />-->
 
         </LinearLayout>
-
-
 
         </LinearLayout>
 
