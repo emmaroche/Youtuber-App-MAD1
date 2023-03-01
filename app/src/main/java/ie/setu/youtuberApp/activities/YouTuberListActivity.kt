@@ -1,5 +1,6 @@
 package ie.setu.youtuberApp.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,7 @@ import ie.setu.youtuberApp.adapters.YoutuberListener
 import ie.setu.youtuberApp.databinding.ActivityYouTuberListBinding
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
+import timber.log.Timber
 
 
 class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
@@ -37,6 +39,9 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     }
 
+    //layout and populate for display
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -57,6 +62,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
+
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.youtubers.findAll().size)
             }
@@ -66,20 +72,24 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         val launcherIntent = Intent(this, YoutuberActivity::class.java)
         launcherIntent.putExtra("youtuber_edit", youtuber)
         getClickResult.launch(launcherIntent)
-
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
+                //Log messages to check if youtuber item is updated and/or deleted if delete or update buttons are clicked
+                Timber.i("Get Clicked Button Pressed")
+                Timber.i("Get Clicked Button Pressed ${app.youtubers.findAll()}")
+
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.youtubers.findAll().size)
+                notifyDataSetChanged()
+
+//              (binding.recyclerView.adapter)?.
+//              notifyItemRangeChanged(0,app.youtubers.findAll().size)
             }
         }
-
-
-
 
 }

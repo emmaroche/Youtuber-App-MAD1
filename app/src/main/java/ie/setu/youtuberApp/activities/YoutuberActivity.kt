@@ -110,7 +110,10 @@ class YoutuberActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_delete -> {
+                i("Delete Button Pressed: $youtuber")
                 app.youtubers.delete(youtuber)
+                i("After delete Button Pressed: ${app.youtubers.findAll()}")
+                setResult(RESULT_OK)
                 finish()
             }
             R.id.item_cancel -> {
