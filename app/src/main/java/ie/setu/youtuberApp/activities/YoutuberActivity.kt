@@ -1,9 +1,13 @@
 package ie.setu.youtuberApp.activities
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +19,7 @@ import ie.setu.youtuberApp.helpers.showImagePicker
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
+import java.util.*
 
 
 class YoutuberActivity : AppCompatActivity() {
@@ -24,12 +29,18 @@ class YoutuberActivity : AppCompatActivity() {
     private var youtuber = YoutuberModel()
     private lateinit var app: MainApp
     private var edit = false
+    private var datePickerDialog: DatePickerDialog? = null
+    private var dateButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityYoutuberBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initDatePicker()
+        dateButton = findViewById(R.id.datePickerButton)
+        dateButton?.text = getTodaysDate()
 
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
@@ -44,21 +55,21 @@ class YoutuberActivity : AppCompatActivity() {
             binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
             binding.youtuberRating.value = youtuber.youtuberRating
-//            youtuber.dob = binding.youtuberDOB.toString()
-//            setUpNumberPicker()
+            binding.datePickerButton.text = youtuber.dob
             binding.btnAdd.setText(R.string.button_saveYoutuber)
             Picasso.get()
                 .load(youtuber.youtuberImage)
                 .resize(900,800)
                 .into(binding.youtuberImage)
-
         }
 
         binding.btnAdd.setOnClickListener {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
             youtuber.youtuberRating = binding.youtuberRating.value
-//            youtuber.dob = binding.youtuberDOB.toString()
+
+
+            youtuber.dob = binding.datePickerButton.text.toString()
 
             if (youtuber.name.isEmpty()) {
                 Snackbar.make(it,R.string.error_Text, Snackbar.LENGTH_LONG)
@@ -67,12 +78,12 @@ class YoutuberActivity : AppCompatActivity() {
             } else {
                 if (edit) {
                     app.youtubers.update(youtuber.copy())
-                    i("edit Button Pressed: $youtuber")
+                    i("Edit Button Pressed: $youtuber")
                     setResult(RESULT_OK)
                     finish()
                 } else {
                     app.youtubers.create(youtuber.copy())
-                    i("add Button Pressed: $youtuber")
+                    i("Add Button Pressed: $youtuber")
                     setResult(RESULT_OK)
                     finish()
                 }
@@ -80,23 +91,11 @@ class YoutuberActivity : AppCompatActivity() {
 
         }
 
-//        val datePicker = findViewById<DatePicker>(R.id.youtuberDOB)
-//        val today = Calendar.getInstance()
-//        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-//            today.get(Calendar.DAY_OF_MONTH)
-//
-//        ) { view, year, month, day ->
-//            val month = month + 1
-//            val msg = "You Selected: $day/$month/$year"
-//            Toast.makeText(this@YoutuberActivity, msg, Toast.LENGTH_SHORT).show()
-//        }
-
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
 
         registerImagePickerCallback()
-
         setUpNumberPicker()
 
     }
@@ -125,14 +124,9 @@ class YoutuberActivity : AppCompatActivity() {
 
     private fun setUpNumberPicker() {
         val numberPicker = binding.youtuberRating
-
         numberPicker.minValue = 1
         numberPicker.maxValue = 10
         numberPicker.wrapSelectorWheel = false
-//        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-//            val text = "Changed from $oldVal to $newVal"
-//            Toast.makeText(this@YoutuberActivity, text, Toast.LENGTH_SHORT).show()
-//        }
     }
 
     private fun registerImagePickerCallback() {
@@ -148,10 +142,59 @@ class YoutuberActivity : AppCompatActivity() {
                                 .load(youtuber.youtuberImage)
                                 .resize(900,800)
                                 .into(binding.youtuberImage)
-                        } // end of if
+                        }
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
+
+    private fun getTodaysDate(): String {
+        val cal = Calendar.getInstance()
+        val year = cal[Calendar.YEAR]
+        var month = cal[Calendar.MONTH]
+        month += 1
+        val day = cal[Calendar.DAY_OF_MONTH]
+        return makeDateString(day, month, year)
+    }
+
+    private fun initDatePicker() {
+        val dateSetListener =
+            OnDateSetListener { _, year, month, day ->
+                var month = month
+                month += 1
+                val date = makeDateString(day, month, year)
+                dateButton?.text = date
+            }
+        val cal = Calendar.getInstance()
+        val year = cal[Calendar.YEAR]
+        val month = cal[Calendar.MONTH]
+        val day = cal[Calendar.DAY_OF_MONTH]
+        datePickerDialog = DatePickerDialog(this, dateSetListener, year, month, day)
+    }
+
+    private fun makeDateString(day: Int, month: Int, year: Int): String {
+        return getMonthFormat(month) + " " + day + " " + year
+    }
+
+    private fun getMonthFormat(month: Int): String {
+        if (month == 1) return "JAN"
+        if (month == 2) return "FEB"
+        if (month == 3) return "MAR"
+        if (month == 4) return "APR"
+        if (month == 5) return "MAY"
+        if (month == 6) return "JUN"
+        if (month == 7) return "JUL"
+        if (month == 8) return "AUG"
+        if (month == 9) return "SEP"
+        if (month == 10) return "OCT"
+        if (month == 11) return "NOV"
+        return if (month == 12) "DEC" else "JAN"
+    }
+
+    fun openDatePicker(view: View?) {
+        datePickerDialog?.show()
+    }
 }
+
+

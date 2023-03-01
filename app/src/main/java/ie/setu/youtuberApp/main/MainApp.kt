@@ -7,7 +7,6 @@ import timber.log.Timber.i
 class MainApp : Application() {
 
      var youtubers = YoutuberMemStore()
-
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
