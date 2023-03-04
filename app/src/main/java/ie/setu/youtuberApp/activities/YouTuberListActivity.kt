@@ -19,14 +19,10 @@ import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber
 
-
 class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
-
 
     private lateinit var app: MainApp
     private lateinit var binding: ActivityYouTuberListBinding
-    private var firstImageShown = true
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(),this)
+        binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(), this)
 
     }
 
@@ -71,8 +67,10 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
 
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.youtubers.findAll().size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(
+                    0,
+                    app.youtubers.findAll().size
+                )
             }
         }
 
@@ -87,16 +85,13 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         val firstImage: ImageView = findViewById<View>(R.id.chooseFav) as ImageView
 
-        if(!youtuber.isFavouriteYoutuber){
+        if (!youtuber.isFavouriteYoutuber) {
             firstImage.setImageResource(R.drawable.ic_star_selected)
             youtuber.isFavouriteYoutuber = true
-            true
 
-        }
-        else {
+        } else {
             firstImage.setImageResource(R.drawable.ic_star_unselected)
             youtuber.isFavouriteYoutuber = false
-            false
         }
         Timber.i("After Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
     }
@@ -111,8 +106,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 Timber.i("Get Clicked Button Pressed")
                 Timber.i("Get Clicked Button Pressed ${app.youtubers.findAll()}")
 
-                (binding.recyclerView.adapter)?.
-                notifyDataSetChanged()
+                (binding.recyclerView.adapter)?.notifyDataSetChanged()
 
 //              (binding.recyclerView.adapter)?.
 //              notifyItemRangeChanged(0,app.youtubers.findAll().size)

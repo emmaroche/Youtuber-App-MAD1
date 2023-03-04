@@ -16,4 +16,6 @@
     <string name="display_youtuber_image">YouTuber image</string>
     <string name="jan_01_2020">JAN 01 2020</string>
     <string name="search">Search</string>
+    <string name="youtuber_information">YouTuber Information</string>
+    <string name="rate_youtuber">Rate this YouTuber (1 -10)</string>
 </resources>

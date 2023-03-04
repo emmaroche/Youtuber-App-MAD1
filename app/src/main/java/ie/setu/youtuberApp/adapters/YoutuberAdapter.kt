@@ -12,7 +12,11 @@ interface YoutuberListener {
     fun onYoutuberClick(youtuber: YoutuberModel)
     fun onButtonClick(youtuber: YoutuberModel)
 }
-class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  private val listener: YoutuberListener) :
+
+class YoutuberAdapter constructor(
+    private var youtubers: List<YoutuberModel>,
+    private val listener: YoutuberListener
+) :
     RecyclerView.Adapter<YoutuberAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -29,7 +33,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
 
     override fun getItemCount(): Int = youtubers.size
 
-    class MainHolder(private val binding : CardYoutuberBinding) :
+    class MainHolder(private val binding: CardYoutuberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
@@ -39,7 +43,7 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
             binding.youtuberDobText.text = youtuber.dob
             Picasso.get().load(youtuber.youtuberImage).into(binding.displayImage)
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
-            if(!youtuber.isFavouriteYoutuber) {
+            if (!youtuber.isFavouriteYoutuber) {
                 binding.chooseFav.setImageResource(R.drawable.ic_star_unselected)
             }
             binding.chooseFav.setOnClickListener { listener.onButtonClick(youtuber) }
