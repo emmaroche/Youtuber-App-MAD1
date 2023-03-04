@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.CardYoutuberBinding
 import ie.setu.youtuberApp.models.YoutuberModel
 
 interface YoutuberListener {
     fun onYoutuberClick(youtuber: YoutuberModel)
+    fun onButtonClick(youtuber: YoutuberModel)
 }
 class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  private val listener: YoutuberListener) :
     RecyclerView.Adapter<YoutuberAdapter.MainHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardYoutuberBinding
@@ -38,8 +39,14 @@ class YoutuberAdapter constructor(private var youtubers: List<YoutuberModel>,  p
             binding.youtuberDobText.text = youtuber.dob
             Picasso.get().load(youtuber.youtuberImage).into(binding.displayImage)
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
+            if(!youtuber.isFavouriteYoutuber) {
+                binding.chooseFav.setImageResource(R.drawable.ic_star_unselected)
+            }
+            binding.chooseFav.setOnClickListener { listener.onButtonClick(youtuber) }
+
         }
     }
 
 
 }
+

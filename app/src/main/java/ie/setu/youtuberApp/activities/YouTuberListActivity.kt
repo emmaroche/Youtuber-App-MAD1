@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,8 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     private lateinit var app: MainApp
     private lateinit var binding: ActivityYouTuberListBinding
+    private var firstImageShown = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,6 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     //layout and populate for display
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -53,6 +56,11 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 val launcherIntent = Intent(this, YoutuberActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+
+//            R.id.item_add2 -> {
+//                Timber.i("Filter Button Pressed: ${youtuber.isFavouriteYoutuber}")
+//                app.youtubers.filter(youtuber)
+//            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -72,6 +80,25 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         val launcherIntent = Intent(this, YoutuberActivity::class.java)
         launcherIntent.putExtra("youtuber_edit", youtuber)
         getClickResult.launch(launcherIntent)
+    }
+
+    override fun onButtonClick(youtuber: YoutuberModel) {
+        Timber.i("Before Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
+
+        val firstImage: ImageView = findViewById<View>(R.id.chooseFav) as ImageView
+
+        if(!youtuber.isFavouriteYoutuber){
+            firstImage.setImageResource(R.drawable.ic_star_selected)
+            youtuber.isFavouriteYoutuber = true
+            true
+
+        }
+        else {
+            firstImage.setImageResource(R.drawable.ic_star_unselected)
+            youtuber.isFavouriteYoutuber = false
+            false
+        }
+        Timber.i("After Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
     }
 
     @SuppressLint("NotifyDataSetChanged")
