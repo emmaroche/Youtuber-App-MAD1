@@ -18,4 +18,5 @@
     <string name="search">Search</string>
     <string name="youtuber_information">YouTuber Information</string>
     <string name="rate_youtuber">Rate this YouTuber (1 -10)</string>
+    <string name="ok">OK</string>
 </resources>

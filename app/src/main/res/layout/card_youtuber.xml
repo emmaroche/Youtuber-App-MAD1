@@ -74,11 +74,23 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/chooseFav"
-                android:layout_margin="100dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+<!--            <ToggleButton-->
+<!--                android:id="@+id/chooseFav"-->
+<!--                android:layout_margin="100dp"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:textOn=""-->
+<!--                android:textOff=""-->
+<!--                android:text=""/>-->
+
+            <ToggleButton android:id="@+id/chooseFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle"
+                android:textOn=""
+                android:textOff=""
+                android:text="" />
+
 
         </LinearLayout>
 

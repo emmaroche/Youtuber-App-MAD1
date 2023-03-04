@@ -30,6 +30,7 @@ class YoutuberMemStore : YoutuberStore {
             foundYoutuber.youtuberRating = youtuber.youtuberRating
             foundYoutuber.youtuberImage = youtuber.youtuberImage
             foundYoutuber.dob = youtuber.dob
+            foundYoutuber.isFavouriteYoutuber = youtuber.isFavouriteYoutuber
             logAll()
         }
     }
@@ -40,18 +41,16 @@ class YoutuberMemStore : YoutuberStore {
         logAll()
     }
 
-//    override fun filter(youtuber: YoutuberModel) {
-//
-////        if (numberOfFavouriteYoutubers() == 0) i ("\n No YouTubers stored as favourites")
-////        else youtubers.filter { youtubers -> youtubers.isFavouriteYoutuber }
-//
-//
-//        youtubers.filter { youtubers -> youtubers.name}
-//        logAll()
-//
-//    }
+    override fun filter(youtuber: Boolean) {
 
-//    private fun numberOfFavouriteYoutubers(): Int = youtubers.count { youtubers -> youtubers.isFavouriteYoutuber }
+        if (numberOfFavouriteYoutubers() == 0) i ("\n No YouTubers stored as favourites")
+        else youtubers.filter { youtubers -> youtubers.isFavouriteYoutuber }
+
+        logAll()
+
+    }
+
+    private fun numberOfFavouriteYoutubers(): Int = youtubers.count { youtubers -> youtubers.isFavouriteYoutuber }
 
     private fun logAll() {
         youtubers.forEach { i("$it") }

@@ -43,11 +43,7 @@ class YoutuberAdapter constructor(
             binding.youtuberDobText.text = youtuber.dob
             Picasso.get().load(youtuber.youtuberImage).into(binding.displayImage)
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
-            if (!youtuber.isFavouriteYoutuber) {
-                binding.chooseFav.setImageResource(R.drawable.ic_star_unselected)
-            }
             binding.chooseFav.setOnClickListener { listener.onButtonClick(youtuber) }
-
         }
     }
 

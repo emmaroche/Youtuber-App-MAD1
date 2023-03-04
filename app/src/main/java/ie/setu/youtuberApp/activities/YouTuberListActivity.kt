@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     private lateinit var app: MainApp
     private lateinit var binding: ActivityYouTuberListBinding
+    private var youtuber = YoutuberModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +55,10 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 getResult.launch(launcherIntent)
             }
 
-//            R.id.item_add2 -> {
-//                Timber.i("Filter Button Pressed: ${youtuber.isFavouriteYoutuber}")
-//                app.youtubers.filter(youtuber)
-//            }
+            R.id.item_add2 -> {
+                Timber.i("Filter Button Pressed")
+                app.youtubers.filter(!youtuber.isFavouriteYoutuber)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -83,16 +85,10 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
     override fun onButtonClick(youtuber: YoutuberModel) {
         Timber.i("Before Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
 
-        val firstImage: ImageView = findViewById<View>(R.id.chooseFav) as ImageView
+        findViewById<View>(R.id.chooseFav) as ToggleButton
 
-        if (!youtuber.isFavouriteYoutuber) {
-            firstImage.setImageResource(R.drawable.ic_star_selected)
-            youtuber.isFavouriteYoutuber = true
+        youtuber.isFavouriteYoutuber = !youtuber.isFavouriteYoutuber
 
-        } else {
-            firstImage.setImageResource(R.drawable.ic_star_unselected)
-            youtuber.isFavouriteYoutuber = false
-        }
         Timber.i("After Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
     }
 
@@ -103,7 +99,6 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
                 //Log messages to check if youtuber item is updated and/or deleted if delete or update buttons are clicked
-                Timber.i("Get Clicked Button Pressed")
                 Timber.i("Get Clicked Button Pressed ${app.youtubers.findAll()}")
 
                 (binding.recyclerView.adapter)?.notifyDataSetChanged()

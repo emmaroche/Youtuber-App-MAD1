@@ -10,6 +10,6 @@ interface YoutuberStore {
 
     fun delete(youtuber: YoutuberModel)
 
-//    fun filter(youtuber: YoutuberModel)
+    fun filter(youtuber: Boolean)
 
 }
