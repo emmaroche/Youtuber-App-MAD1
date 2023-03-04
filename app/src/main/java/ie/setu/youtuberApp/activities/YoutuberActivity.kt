@@ -38,6 +38,7 @@ class YoutuberActivity : AppCompatActivity() {
         binding = ActivityYoutuberBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Calendar/date picker
         initDatePicker()
         dateButton = findViewById(R.id.datePickerButton)
         dateButton?.text = getTodaysDate()
@@ -95,15 +96,19 @@ class YoutuberActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
+
+
         registerImagePickerCallback()
         setUpNumberPicker()
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
         if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -195,6 +200,10 @@ class YoutuberActivity : AppCompatActivity() {
     fun openDatePicker(view: View?) {
         datePickerDialog?.show()
     }
+
+
 }
+
+
 
 
