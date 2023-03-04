@@ -68,8 +68,6 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
             youtuber.youtuberRating = binding.youtuberRating.value
-
-
             youtuber.dob = binding.datePickerButton.text.toString()
 
             if (youtuber.name.isEmpty()) {
@@ -96,19 +94,15 @@ class YoutuberActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
-
-
         registerImagePickerCallback()
         setUpNumberPicker()
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
         if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
