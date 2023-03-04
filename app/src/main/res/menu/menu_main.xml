@@ -8,18 +8,18 @@
         android:title="@string/menu_addYouTuber"
         app:showAsAction="always" />
 
-<!--    <item-->
-<!--        android:id="@+id/item_add2"-->
-<!--        android:icon="@android:drawable/ic_menu_sort_by_size"-->
-<!--        android:title="@string/menu_addYouTuber"-->
-<!--        app:showAsAction="always" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/item_add2"-->
+    <!--        android:icon="@android:drawable/ic_menu_sort_by_size"-->
+    <!--        android:title="@string/menu_addYouTuber"-->
+    <!--        app:showAsAction="always" />-->
 
-<!--    <item-->
-<!--        android:id="@+id/item_search"-->
-<!--        android:icon="@android:drawable/ic_menu_search"-->
-<!--        android:title="@string/search"-->
-<!--        app:showAsAction="always|collapseActionView"-->
-<!--        app:actionViewClass="com.google.android.material.search.SearchView"/>-->
+    <!--    <item-->
+    <!--        android:id="@+id/item_search"-->
+    <!--        android:icon="@android:drawable/ic_menu_search"-->
+    <!--        android:title="@string/search"-->
+    <!--        app:showAsAction="always|collapseActionView"-->
+    <!--        app:actionViewClass="com.google.android.material.search.SearchView"/>-->
 
     <item
         android:id="@+id/actionSearch"

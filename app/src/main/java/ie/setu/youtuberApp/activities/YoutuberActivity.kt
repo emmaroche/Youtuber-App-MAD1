@@ -25,7 +25,7 @@ import java.util.*
 class YoutuberActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityYoutuberBinding
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private var youtuber = YoutuberModel()
     private lateinit var app: MainApp
     private var edit = false
@@ -60,7 +60,7 @@ class YoutuberActivity : AppCompatActivity() {
             binding.btnAdd.setText(R.string.button_saveYoutuber)
             Picasso.get()
                 .load(youtuber.youtuberImage)
-                .resize(900,800)
+                .resize(900, 800)
                 .into(binding.youtuberImage)
         }
 
@@ -73,7 +73,7 @@ class YoutuberActivity : AppCompatActivity() {
             youtuber.dob = binding.datePickerButton.text.toString()
 
             if (youtuber.name.isEmpty()) {
-                Snackbar.make(it,R.string.error_Text, Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.error_Text, Snackbar.LENGTH_LONG)
                     .show()
 
             } else {
@@ -138,18 +138,19 @@ class YoutuberActivity : AppCompatActivity() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
-                when(result.resultCode){
+                when (result.resultCode) {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
                             youtuber.youtuberImage = result.data!!.data!!
                             Picasso.get()
                                 .load(youtuber.youtuberImage)
-                                .resize(900,800)
+                                .resize(900, 800)
                                 .into(binding.youtuberImage)
                         }
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
