@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -55,9 +54,9 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 getResult.launch(launcherIntent)
             }
 
-            R.id.item_add2 -> {
+            R.id.item_filter -> {
                 Timber.i("Filter Button Pressed")
-                app.youtubers.filter(!youtuber.isFavouriteYoutuber)
+                app.youtubers.filter(youtuber.isFavouriteYoutuber)
             }
         }
         return super.onOptionsItemSelected(item)

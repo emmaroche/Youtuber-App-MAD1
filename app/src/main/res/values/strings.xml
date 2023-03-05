@@ -14,9 +14,10 @@
     <string name="select_youtuber_image">Select YouTuber image</string>
     <string name="change_youtuber_image">Change YouTuber image</string>
     <string name="display_youtuber_image">YouTuber image</string>
-    <string name="jan_01_2020">JAN 01 2020</string>
-    <string name="search">Search</string>
     <string name="youtuber_information">YouTuber Information</string>
     <string name="rate_youtuber">Rate this YouTuber (1 -10)</string>
-    <string name="ok">OK</string>
+    <string name="search_youtuber">Search</string>
+    <string name="date_picker">Date Picker</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="youtuber_image">Youtuber Image</string>
 </resources>
