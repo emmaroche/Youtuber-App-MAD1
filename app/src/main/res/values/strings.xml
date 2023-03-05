@@ -9,8 +9,8 @@
     <string name="menu_deleteYoutuber">Delete</string>
     <string name="menu_cancelAdd">Cancel</string>
     <string name="error_Text">Please enter a YouTubers name</string>
-    <string name="add_Image_Text">Add Image</string>
-    <string name="add_DOB_Text">Add YouTubers Date of Birth</string>
+    <string name="add_Image_Text">Add YouTuber Image</string>
+    <string name="add_DOB_Text">Add YouTuber Date of Birth</string>
     <string name="select_youtuber_image">Select YouTuber image</string>
     <string name="change_youtuber_image">Change YouTuber image</string>
     <string name="display_youtuber_image">YouTuber image</string>
