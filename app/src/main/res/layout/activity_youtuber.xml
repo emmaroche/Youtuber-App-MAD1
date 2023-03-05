@@ -52,7 +52,7 @@
                 <EditText
                     android:id="@+id/youtuberName"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
                     android:hint="@string/hint_youtuberName"
@@ -66,10 +66,11 @@
                 <EditText
                     android:id="@+id/youtuberChannelName"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"
                     android:hint="@string/hint_youtuberChannelName"
+                    android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
@@ -96,7 +97,7 @@
                         android:id="@+id/datePickerButton"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/jan_01_2020"
+                        android:text="@string/date_picker"
                         android:textSize="30sp"
                         android:textColor="@color/black"
                         style="?android:spinnerStyle"
@@ -120,7 +121,7 @@
                     android:id="@+id/youtuberImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    android:contentDescription="@string/youtuber_image" />
 
                 <LinearLayout
                     android:id="@+id/LinearLayoutButton"
@@ -134,9 +135,9 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_margin="16dp"
-                        android:background="@android:drawable/ic_menu_add"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:background="@drawable/baseline_add_photo"
+                        android:text="@string/choose_image"
+                        android:textSize="0sp" />
                 </LinearLayout>
 
                 <TextView
@@ -153,7 +154,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />
 
-
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
@@ -164,9 +164,8 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addYoutuber"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
-
 
             </LinearLayout>
         </ScrollView>

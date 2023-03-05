@@ -43,14 +43,15 @@ class YoutuberMemStore : YoutuberStore {
 
     override fun filter(youtuber: Boolean) {
 
-        if (numberOfFavouriteYoutubers() == 0) i ("\n No YouTubers stored as favourites")
-        else youtubers.filter { youtubers -> youtubers.isFavouriteYoutuber }
-
-        logAll()
+        if (numberOfFavouriteYoutubers() == 0) i("\n No YouTubers stored as favourites")
+        val filteredList = youtubers.filter { it.isFavouriteYoutuber }
+        i("$filteredList")
 
     }
 
-    private fun numberOfFavouriteYoutubers(): Int = youtubers.count { youtubers -> youtubers.isFavouriteYoutuber }
+    private fun numberOfFavouriteYoutubers(): Int =
+        youtubers.count { youtubers -> youtubers.isFavouriteYoutuber }
+
 
     private fun logAll() {
         youtubers.forEach { i("$it") }

@@ -34,7 +34,7 @@
             android:orientation="vertical"
             android:layout_margin="25dp"
             android:padding="16dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content">
 
 
@@ -43,20 +43,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                tools:text="A Title" />
+                tools:text="Name" />
 
             <TextView
                 android:id="@+id/youtuberChannelName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="A Description" />
-
-
-            <TextView
-                android:id="@+id/youtuberRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="A rating" />
+                tools:text="Channel Name" />
 
             <TextView
                 android:id="@+id/youtuberDobText"
@@ -64,6 +57,11 @@
                 android:layout_height="wrap_content"
                 tools:text="DOB" />
 
+            <TextView
+                android:id="@+id/youtuberRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Rating" />
 
         </LinearLayout>
 
@@ -74,16 +72,8 @@
             android:gravity="center"
             android:orientation="vertical">
 
-<!--            <ToggleButton-->
-<!--                android:id="@+id/chooseFav"-->
-<!--                android:layout_margin="100dp"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:textOn=""-->
-<!--                android:textOff=""-->
-<!--                android:text=""/>-->
-
-            <ToggleButton android:id="@+id/chooseFav"
+            <ToggleButton
+                android:id="@+id/chooseFav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/toggle"

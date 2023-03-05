@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.CardYoutuberBinding
 import ie.setu.youtuberApp.models.YoutuberModel
 
@@ -46,7 +45,5 @@ class YoutuberAdapter constructor(
             binding.chooseFav.setOnClickListener { listener.onButtonClick(youtuber) }
         }
     }
-
-
 }
 
