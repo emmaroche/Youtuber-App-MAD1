@@ -1,5 +1,6 @@
 package ie.setu.youtuberApp.activities
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -98,6 +100,8 @@ class YoutuberActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
         if (edit) menu.getItem(0).isVisible = true
@@ -107,11 +111,34 @@ class YoutuberActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_delete -> {
-                i("Delete Button Pressed: $youtuber")
-                app.youtubers.delete(youtuber)
-                i("After delete Button Pressed: ${app.youtubers.findAll()}")
-                setResult(RESULT_OK)
-                finish()
+
+                val builder = AlertDialog.Builder(this)
+                //set title for alert dialog
+                builder.setTitle(R.string.dialogTitle)
+                //set message for alert dialog
+                builder.setMessage(R.string.dialogMessage)
+                builder.setIcon(R.drawable.baseline_warning)
+
+                //yes option selected
+                builder.setPositiveButton("Yes") { _, _ ->
+                    Toast.makeText(applicationContext, "YouTuber Deleted", Toast.LENGTH_LONG).show()
+                    i("Delete Button Pressed: $youtuber")
+                    app.youtubers.delete(youtuber)
+                    i("After delete Button Pressed: ${app.youtubers.findAll()}")
+                    setResult(RESULT_OK)
+                    finish()
+                }
+
+                //cancel option selected
+                builder.setNegativeButton("Cancel"){ _, _ ->
+                    Toast.makeText(applicationContext,"Delete Cancelled",Toast.LENGTH_LONG).show()
+                }
+
+                // Create the AlertDialog
+                val alertDialog: AlertDialog = builder.create()
+                // Set other dialog properties
+                alertDialog.setCancelable(false)
+                alertDialog.show()
             }
             R.id.item_cancel -> {
                 finish()
@@ -194,6 +221,7 @@ class YoutuberActivity : AppCompatActivity() {
     fun openDatePicker(view: View?) {
         datePickerDialog?.show()
     }
+
 
 }
 
