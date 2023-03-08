@@ -20,4 +20,6 @@
     <string name="date_picker">Date Picker</string>
     <string name="choose_image">Choose Image</string>
     <string name="youtuber_image">Youtuber Image</string>
+    <string name="dialogTitle">Delete YouTuber</string>
+    <string name="dialogMessage">Are you sure you want to delete this YouTuber?</string>
 </resources>
