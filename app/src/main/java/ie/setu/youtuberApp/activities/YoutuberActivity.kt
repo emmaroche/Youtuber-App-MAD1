@@ -101,7 +101,6 @@ class YoutuberActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
         if (edit) menu.getItem(0).isVisible = true
@@ -112,6 +111,7 @@ class YoutuberActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.item_delete -> {
 
+                // Code resource used to help: https://www.javatpoint.com/kotlin-android-alertdialog
                 val builder = AlertDialog.Builder(this)
                 //set title for alert dialog
                 builder.setTitle(R.string.dialogTitle)
@@ -130,8 +130,8 @@ class YoutuberActivity : AppCompatActivity() {
                 }
 
                 //cancel option selected
-                builder.setNegativeButton("Cancel"){ _, _ ->
-                    Toast.makeText(applicationContext,"Delete Cancelled",Toast.LENGTH_LONG).show()
+                builder.setNegativeButton("Cancel") { _, _ ->
+                    Toast.makeText(applicationContext, "Delete Cancelled", Toast.LENGTH_LONG).show()
                 }
 
                 // Create the AlertDialog
