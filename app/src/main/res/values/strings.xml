@@ -22,4 +22,6 @@
     <string name="youtuber_image">Youtuber Image</string>
     <string name="dialogTitle">Delete YouTuber</string>
     <string name="dialogMessage">Are you sure you want to delete this YouTuber?</string>
+    <string name="splash_screen_text">The YouTuber App</string>
+    <string name="youtuber_app_logo_description">YouTuber App Logo</string>
 </resources>
