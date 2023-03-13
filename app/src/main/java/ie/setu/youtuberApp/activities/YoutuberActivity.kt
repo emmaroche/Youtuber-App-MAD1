@@ -19,6 +19,7 @@ import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.ActivityYoutuberBinding
 import ie.setu.youtuberApp.helpers.showImagePicker
 import ie.setu.youtuberApp.main.MainApp
+import ie.setu.youtuberApp.models.Location
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
 import java.util.*
@@ -27,11 +28,13 @@ class YoutuberActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityYoutuberBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
     private var youtuber = YoutuberModel()
     private lateinit var app: MainApp
     private var edit = false
     private var datePickerDialog: DatePickerDialog? = null
     private var dateButton: Button? = null
+    private var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,8 +98,19 @@ class YoutuberActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
+        binding.youtuberLocation.setOnClickListener {
+            if (youtuber.zoom != 0f) {
+                location.lat =  youtuber.lat
+                location.lng = youtuber.lng
+                location.zoom = youtuber.zoom
+            }
+            val launcherIntent = Intent(this, MapsActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
         registerImagePickerCallback()
         setUpNumberPicker()
+        registerMapCallback()
 
     }
 
@@ -222,6 +236,25 @@ class YoutuberActivity : AppCompatActivity() {
         datePickerDialog?.show()
     }
 
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            i("Location == $location")
+                            youtuber.lat = location.lat
+                            youtuber.lng = location.lng
+                            youtuber.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
 
 }
 
