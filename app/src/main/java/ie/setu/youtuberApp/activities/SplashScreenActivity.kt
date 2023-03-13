@@ -8,7 +8,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import ie.setu.youtuberApp.R
 
-
 //Code resource to help create splash screen: https://www.geeksforgeeks.org/how-to-create-a-splash-screen-in-android-using-kotlin/
 @Suppress("DEPRECATION")
 class SplashScreenActivity : AppCompatActivity() {
