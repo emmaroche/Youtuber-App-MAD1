@@ -2,11 +2,13 @@ package ie.setu.youtuberApp.activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +54,37 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, YoutuberActivity::class.java)
                 getResult.launch(launcherIntent)
+            }
+
+            R.id.item_delete2 -> {
+                // Code resource used to help: https://www.javatpoint.com/kotlin-android-alertdialog
+                val builder = AlertDialog.Builder(this)
+                //set title for alert dialog
+                builder.setTitle(R.string.dialogTitleDeleteAll)
+                //set message for alert dialog
+                builder.setMessage(R.string.dialogMessageDeleteAll)
+                builder.setIcon(R.drawable.baseline_warning)
+
+                //yes option selected
+                builder.setPositiveButton("Yes") { _, _ ->
+                    Toast.makeText(applicationContext, "All YouTubers Deleted", Toast.LENGTH_LONG).show()
+                    Timber.i("Delete Button Pressed: $youtuber")
+                    app.youtubers.clear()
+                    Timber.i("After delete Button Pressed: ${app.youtubers.findAll()}")
+                    val launcherIntent = Intent(this, YouTuberListActivity::class.java)
+                    getResult.launch(launcherIntent)
+                }
+
+                //cancel option selected
+                builder.setNegativeButton("Cancel") { _, _ ->
+                    Toast.makeText(applicationContext, "Delete Cancelled", Toast.LENGTH_LONG).show()
+                }
+
+                // Create the AlertDialog
+                val alertDialog: AlertDialog = builder.create()
+                // Set other dialog properties
+                alertDialog.setCancelable(false)
+                alertDialog.show()
             }
 
             R.id.item_filter -> {
