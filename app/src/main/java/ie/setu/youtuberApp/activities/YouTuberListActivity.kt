@@ -67,7 +67,8 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
                 //yes option selected
                 builder.setPositiveButton("Yes") { _, _ ->
-                    Toast.makeText(applicationContext, "All YouTubers Deleted", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "All YouTubers Deleted", Toast.LENGTH_LONG)
+                        .show()
                     Timber.i("Delete Button Pressed: $youtuber")
                     app.youtubers.clear()
                     Timber.i("After delete Button Pressed: ${app.youtubers.findAll()}")

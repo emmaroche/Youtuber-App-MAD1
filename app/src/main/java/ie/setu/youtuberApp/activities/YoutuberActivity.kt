@@ -95,13 +95,13 @@ class YoutuberActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            showImagePicker(imageIntentLauncher, this)
         }
 
         binding.youtuberLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
             if (youtuber.zoom != 0f) {
-                location.lat =  youtuber.lat
+                location.lat = youtuber.lat
                 location.lng = youtuber.lng
                 location.zoom = youtuber.zoom
             }
@@ -169,27 +169,6 @@ class YoutuberActivity : AppCompatActivity() {
         numberPicker.wrapSelectorWheel = false
     }
 
-    private fun registerImagePickerCallback() {
-        imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
-                when (result.resultCode) {
-                    RESULT_OK -> {
-                        if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            youtuber.youtuberImage = result.data!!.data!!
-                            Picasso.get()
-                                .load(youtuber.youtuberImage)
-                                .resize(900, 800)
-                                .into(binding.youtuberImage)
-                        }
-                    }
-                    RESULT_CANCELED -> {}
-                    else -> {}
-                }
-            }
-    }
-
     private fun getTodaysDate(): String {
         val cal = Calendar.getInstance()
         val year = cal[Calendar.YEAR]
@@ -237,6 +216,35 @@ class YoutuberActivity : AppCompatActivity() {
         datePickerDialog?.show()
     }
 
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(
+                                image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            )
+                            youtuber.youtuberImage = image
+
+                            Picasso.get()
+                                .load(youtuber.youtuberImage)
+                                .into(binding.youtuberImage)
+                            binding.chooseImage.setText(R.string.change_youtuber_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> {}
+                    else -> {}
+                }
+            }
+    }
+
+
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -245,14 +253,16 @@ class YoutuberActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            val location =
+                                result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             youtuber.lat = location.lat
                             youtuber.lng = location.lng
                             youtuber.zoom = location.zoom
                         } // end of if
                     }
-                    RESULT_CANCELED -> { } else -> { }
+                    RESULT_CANCELED -> {}
+                    else -> {}
                 }
             }
     }
