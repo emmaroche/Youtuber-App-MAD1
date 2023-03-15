@@ -13,7 +13,7 @@ data class YoutuberModel(
     var youtuberImage: Uri = Uri.EMPTY,
     var dob: String = "",
     var isFavouriteYoutuber: Boolean = false,
-    var lat : Double = 0.0,
+    var lat: Double = 0.0,
     var lng: Double = 0.0,
     var zoom: Float = 0f
 ) : Parcelable

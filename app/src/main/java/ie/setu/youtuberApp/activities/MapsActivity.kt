@@ -15,7 +15,7 @@ import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.ActivityMapsBinding
 import ie.setu.youtuberApp.models.Location
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener,
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener,
     GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
@@ -46,9 +46,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarke
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
     }
 
-    override fun onMarkerDragStart(marker: Marker) {  }
+    override fun onMarkerDragStart(marker: Marker) {}
 
-    override fun onMarkerDrag(marker: Marker) {  }
+    override fun onMarkerDrag(marker: Marker) {}
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val loc = LatLng(location.lat, location.lng)
