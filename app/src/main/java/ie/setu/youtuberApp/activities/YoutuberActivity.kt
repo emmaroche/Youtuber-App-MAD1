@@ -34,7 +34,7 @@ class YoutuberActivity : AppCompatActivity() {
     private var edit = false
     private var datePickerDialog: DatePickerDialog? = null
     private var dateButton: Button? = null
-    private var location = Location(52.245696, -7.139102, 15f)
+//    private var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +99,7 @@ class YoutuberActivity : AppCompatActivity() {
         }
 
         binding.youtuberLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
             if (youtuber.zoom != 0f) {
                 location.lat =  youtuber.lat
                 location.lng = youtuber.lng
@@ -244,7 +245,7 @@ class YoutuberActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
                             youtuber.lat = location.lat
                             youtuber.lng = location.lng

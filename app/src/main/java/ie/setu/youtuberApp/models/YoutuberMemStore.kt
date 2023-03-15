@@ -36,6 +36,9 @@ class YoutuberMemStore : YoutuberStore {
             foundYoutuber.youtuberImage = youtuber.youtuberImage
             foundYoutuber.dob = youtuber.dob
             foundYoutuber.isFavouriteYoutuber = youtuber.isFavouriteYoutuber
+            foundYoutuber.lat = youtuber.lat
+            foundYoutuber.lng = youtuber.lng
+            foundYoutuber.zoom = youtuber.zoom
             logAll()
         }
     }
