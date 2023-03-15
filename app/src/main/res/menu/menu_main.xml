@@ -14,6 +14,12 @@
         android:title="@string/menu_addYouTuber"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/item_delete2"
+        android:title="@string/menu_deleteYoutuber"
+        android:icon="@drawable/delete_icon"
+        app:showAsAction="always" />
+
     <!--    <item-->
     <!--        android:id="@+id/actionSearch"-->
     <!--        android:icon="@android:drawable/ic_menu_search"-->

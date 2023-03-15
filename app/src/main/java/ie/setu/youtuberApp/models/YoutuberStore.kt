@@ -4,6 +4,8 @@ interface YoutuberStore {
 
     fun findAll(): List<YoutuberModel>
 
+    fun clear(): List<YoutuberModel>
+
     fun create(youtuber: YoutuberModel)
 
     fun update(youtuber: YoutuberModel)

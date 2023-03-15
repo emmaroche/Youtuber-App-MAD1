@@ -16,6 +16,11 @@ class YoutuberMemStore : YoutuberStore {
         return youtubers
     }
 
+    override fun clear(): List<YoutuberModel> {
+        youtubers.clear()
+        return youtubers
+    }
+
     override fun create(youtuber: YoutuberModel) {
         youtuber.id = getId()
         youtubers.add(youtuber)
@@ -57,3 +62,5 @@ class YoutuberMemStore : YoutuberStore {
         youtubers.forEach { i("$it") }
     }
 }
+
+
