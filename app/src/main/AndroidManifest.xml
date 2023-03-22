@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YoutuberApp"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.YoutuberMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_youtuber_maps"
+            android:theme="@style/Theme.YoutuberApp.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

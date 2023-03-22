@@ -29,5 +29,8 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_youtuber_maps">Map of ALL YouTubers</string>
+    <string name="map_youtuber_channel_name">Channel Name</string>
+    <string name="map_youtuber_name">YouTuber Name</string>
 
 </resources>
