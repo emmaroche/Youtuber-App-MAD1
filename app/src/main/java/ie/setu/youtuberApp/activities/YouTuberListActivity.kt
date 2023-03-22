@@ -27,6 +27,11 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
     private lateinit var binding: ActivityYouTuberListBinding
     private var youtuber = YoutuberModel()
 
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityYouTuberListBinding.inflate(layoutInflater)
@@ -88,10 +93,15 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 alertDialog.show()
             }
 
-            R.id.item_filter -> {
-                Timber.i("Filter Button Pressed")
-                app.youtubers.filter(youtuber.isFavouriteYoutuber)
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
             }
+
+//            R.id.item_filter -> {
+//                Timber.i("Filter Button Pressed")
+//                app.youtubers.filter(youtuber.isFavouriteYoutuber)
+//            }
         }
         return super.onOptionsItemSelected(item)
     }

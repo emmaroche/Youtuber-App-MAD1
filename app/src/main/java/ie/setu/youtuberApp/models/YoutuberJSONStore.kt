@@ -36,6 +36,7 @@ class YoutuberJSONStore(private val context: Context) : YoutuberStore {
 
     override fun clear(): List<YoutuberModel> {
         youtubers.clear()
+        serialize()
         return youtubers
     }
 

@@ -9,16 +9,22 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/item_filter"
-        android:icon="@drawable/filter_icon"
+        android:id="@+id/item_map"
+        android:icon="@android:drawable/ic_menu_mapmode"
         android:title="@string/menu_addYouTuber"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/item_delete2"
         android:title="@string/menu_deleteYoutuber"
         android:icon="@drawable/delete_icon"
         app:showAsAction="always" />
+
+<!--    <item-->
+<!--        android:id="@+id/item_filter"-->
+<!--        android:icon="@drawable/filter_icon"-->
+<!--        android:title="@string/menu_addYouTuber"-->
+<!--        app:showAsAction="ifRoom" />-->
 
     <!--    <item-->
     <!--        android:id="@+id/actionSearch"-->
