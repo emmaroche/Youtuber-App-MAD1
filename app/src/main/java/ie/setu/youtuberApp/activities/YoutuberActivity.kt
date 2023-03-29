@@ -167,6 +167,7 @@ class YoutuberActivity : AppCompatActivity() {
         numberPicker.minValue = 1
         numberPicker.maxValue = 10
         numberPicker.wrapSelectorWheel = false
+
     }
 
     private fun getTodaysDate(): String {

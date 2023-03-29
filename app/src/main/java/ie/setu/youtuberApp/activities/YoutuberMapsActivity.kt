@@ -7,9 +7,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import ie.setu.youtuberApp.databinding.ActivityYoutuberMapsBinding
 import ie.setu.youtuberApp.databinding.ContentYoutuberMapsBinding
 import ie.setu.youtuberApp.main.MainApp
+import ie.setu.youtuberApp.models.YoutuberModel
 
 class YoutuberMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -66,15 +68,17 @@ class YoutuberMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         app.youtubers.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.name).position(loc)
-            map.addMarker(options)?.tag = it.id
+            map.addMarker(options)?.tag = it
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
             map.setOnMarkerClickListener(this)
         }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        contentBinding.currentYoutuberName.text = marker.title
-        contentBinding.currentChannelName.text = marker.title
+        val youtuber = marker.tag as YoutuberModel
+        contentBinding.currentYoutuberName.text = youtuber.name
+        contentBinding.currentChannelName.text = youtuber.channelName
+        Picasso.get().load(youtuber.youtuberImage).into(contentBinding.imageView2)
         return false
     }
 
