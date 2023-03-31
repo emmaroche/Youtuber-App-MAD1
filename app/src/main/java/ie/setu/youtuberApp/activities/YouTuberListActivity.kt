@@ -12,7 +12,9 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.adapters.YoutuberAdapter
 import ie.setu.youtuberApp.adapters.YoutuberListener
@@ -21,11 +23,17 @@ import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber
 
+
 class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     private lateinit var app: MainApp
     private lateinit var binding: ActivityYouTuberListBinding
     private var youtuber = YoutuberModel()
+
+    private lateinit var youtuberRV: RecyclerView
+    private lateinit var filterYoutubers: YoutuberAdapter
+    private lateinit var youtuberList: ArrayList<YoutuberModel>
+    private lateinit var searchView: SearchView
 
     private val mapIntentLauncher =
         registerForActivityResult(
@@ -39,6 +47,18 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
+        youtuberRV = findViewById(R.id.recyclerView)
+
+        youtuberList = ArrayList()
+
+        //initializing adapter for filtering
+        filterYoutubers = YoutuberAdapter(youtuberList, this)
+
+        //setting adapter to recycler view.
+        youtuberRV.adapter = filterYoutubers
+
+        filterYoutubers.notifyDataSetChanged()
+
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
@@ -47,11 +67,40 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     }
 
-    //layout and populate for display
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
+
+        //A resource shared to me after assignment 1 was used to help me add searching functionality
+        //Code has been significantly modified to work within the YouTuber app
+        //resource: https://www.geeksforgeeks.org/android-searchview-with-recyclerview-using-kotlin/
+
+        val inflater = menuInflater
+
+        inflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem: MenuItem = menu.findItem(R.id.search_filter)
+
+        searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val filteredList = ArrayList<YoutuberModel>()
+                app.youtubers.findAll().forEach {
+                    if (it.name.contains(newText.orEmpty(), true)) {
+                        filteredList.add(it)
+                    }
+                }
+                binding.recyclerView.adapter = YoutuberAdapter(filteredList, this@YouTuberListActivity)
+
+                return false
+            }
+
+        })
+
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,18 +142,21 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 alertDialog.show()
             }
 
-            R.id.item_map -> {
-                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
-                mapIntentLauncher.launch(launcherIntent)
-            }
+//            R.id.item_map -> {
+//                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
+//                mapIntentLauncher.launch(launcherIntent)
+//            }
 
 //            R.id.item_filter -> {
 //                Timber.i("Filter Button Pressed")
 //                app.youtubers.filter(youtuber.isFavouriteYoutuber)
 //            }
         }
+
         return super.onOptionsItemSelected(item)
     }
+
+
 
     private val getResult =
         registerForActivityResult(
@@ -135,6 +187,8 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         Timber.i("After Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
     }
 
+
+
     @SuppressLint("NotifyDataSetChanged")
     private val getClickResult =
         registerForActivityResult(
@@ -152,3 +206,5 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         }
 
 }
+
+
