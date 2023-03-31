@@ -32,5 +32,6 @@
     <string name="title_activity_youtuber_maps">Map of ALL YouTubers</string>
     <string name="map_youtuber_channel_name">Channel Name</string>
     <string name="map_youtuber_name">YouTuber Name</string>
+    <string name="search_item">Search</string>
 
 </resources>
