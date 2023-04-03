@@ -33,5 +33,16 @@
     <string name="map_youtuber_channel_name">Channel Name</string>
     <string name="map_youtuber_name">YouTuber Name</string>
     <string name="search_item">Search</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="not_registered_yet_text">Not Registered Yet ? Sign Up !</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="password_field">Password</string>
+    <string name="email_field">Email</string>
+    <string name="reenter_password">Reenter Password</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="already_registered_sign_in">Already Registered ? Sign In !</string>
+    <string name="my_image_description">Image</string>
 
 </resources>

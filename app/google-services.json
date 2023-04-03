@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "55299880527",
+    "project_id": "r-app-31426",
+    "storage_bucket": "r-app-31426.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55299880527:android:a57b348ee3c75ff5f59c3a",
+        "android_client_info": {
+          "package_name": "ie.setu.youtuberApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55299880527-lq73o4tuhln7qj75fh6qd9bomuqisv0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvsPZWfHlIo4Pzm8k8JtYvoulgjGXGYC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55299880527-lq73o4tuhln7qj75fh6qd9bomuqisv0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

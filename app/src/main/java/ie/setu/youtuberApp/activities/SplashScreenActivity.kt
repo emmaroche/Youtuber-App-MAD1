@@ -31,7 +31,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(this.mainLooper).postDelayed({
 
-            startActivity(Intent(this, YouTuberListActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
 
             finish()
 

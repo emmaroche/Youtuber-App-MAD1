@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_add"
-        android:icon="@drawable/add_icon"
-        android:title="@string/menu_addYouTuber"
+        android:id="@+id/search_filter"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/search_item"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 
-<!--    <item-->
-<!--        android:id="@+id/item_map"-->
-<!--        android:icon="@android:drawable/ic_menu_mapmode"-->
-<!--        android:title="@string/menu_addYouTuber"-->
-<!--        app:showAsAction="always"/>-->
+
+    <item
+        android:id="@+id/item_map"
+        android:icon="@drawable/baseline_map_24"
+        android:title="@string/menu_addYouTuber"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/item_delete2"
@@ -21,11 +23,11 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/search_filter"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/search_item"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
+        android:id="@+id/item_add"
+        android:icon="@drawable/add_icon"
+        android:title="@string/menu_addYouTuber"
+        app:showAsAction="always" />
+
 
 <!--    <item-->
 <!--        android:id="@+id/item_filter"-->
