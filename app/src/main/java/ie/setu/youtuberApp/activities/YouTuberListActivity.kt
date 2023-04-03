@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.adapters.YoutuberAdapter
 import ie.setu.youtuberApp.adapters.YoutuberListener
@@ -22,6 +23,7 @@ import ie.setu.youtuberApp.databinding.ActivityYouTuberListBinding
 import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber
+
 
 
 class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
@@ -142,10 +144,15 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
                 alertDialog.show()
             }
 
-//            R.id.item_map -> {
+            R.id.item_map -> {
 //                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
 //                mapIntentLauncher.launch(launcherIntent)
-//            }
+
+                FirebaseAuth.getInstance().signOut();
+
+                val launcherIntent = Intent(this, SignInActivity::class.java)
+                getResult.launch(launcherIntent)
+            }
 
 //            R.id.item_filter -> {
 //                Timber.i("Filter Button Pressed")
