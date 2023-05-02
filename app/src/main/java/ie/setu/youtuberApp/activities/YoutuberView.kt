@@ -24,7 +24,7 @@ import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
 import java.util.*
 
-class YoutuberActivity : AppCompatActivity() {
+class YoutuberView : AppCompatActivity() {
 
     private lateinit var binding: ActivityYoutuberBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>

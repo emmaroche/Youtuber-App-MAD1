@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.CardYoutuberBinding
 import ie.setu.youtuberApp.models.YoutuberModel
 
@@ -40,7 +41,11 @@ class YoutuberAdapter constructor(
             binding.youtuberChannelName.text = youtuber.channelName
             binding.youtuberRating.text = youtuber.youtuberRating.toString()
             binding.youtuberDobText.text = youtuber.dob
-            Picasso.get().load(youtuber.youtuberImage).into(binding.displayImage)
+            Picasso.get()
+                .load(youtuber.youtuberImage)
+                .placeholder(R.mipmap.person_red_icon_foreground)
+                .error(R.mipmap.person_red_icon_foreground)
+                .into(binding.displayImage)
             binding.root.setOnClickListener { listener.onYoutuberClick(youtuber) }
             binding.chooseFav.setOnClickListener { listener.onButtonClick(youtuber) }
         }

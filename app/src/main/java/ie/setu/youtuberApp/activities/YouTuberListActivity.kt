@@ -53,10 +53,10 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         youtuberList = ArrayList()
 
-        //initializing adapter for filtering
+        // initializing adapter for filtering
         filterYoutubers = YoutuberAdapter(youtuberList, this)
 
-        //setting adapter to recycler view.
+        // setting adapter to recycler view.
         youtuberRV.adapter = filterYoutubers
 
         filterYoutubers.notifyDataSetChanged()
@@ -108,7 +108,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, YoutuberActivity::class.java)
+                val launcherIntent = Intent(this, YoutuberView::class.java)
                 getResult.launch(launcherIntent)
             }
 
@@ -145,8 +145,11 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             }
 
             R.id.item_map -> {
-//                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
-//                mapIntentLauncher.launch(launcherIntent)
+                val launcherIntent = Intent(this, YoutuberMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
+
+            R.id.item_logout -> {
 
                 FirebaseAuth.getInstance().signOut();
 
@@ -179,7 +182,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         }
 
     override fun onYoutuberClick(youtuber: YoutuberModel) {
-        val launcherIntent = Intent(this, YoutuberActivity::class.java)
+        val launcherIntent = Intent(this, YoutuberView::class.java)
         launcherIntent.putExtra("youtuber_edit", youtuber)
         getClickResult.launch(launcherIntent)
     }

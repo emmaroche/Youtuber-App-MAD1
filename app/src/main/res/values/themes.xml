@@ -12,6 +12,7 @@
         <item name="android:statusBarColor">#282828</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+        <item name="android:textColor">#ff000f</item>
     </style>
 
     <style name="Theme.YoutuberApp.NoActionBar">

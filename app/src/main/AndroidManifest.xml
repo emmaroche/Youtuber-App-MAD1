@@ -65,7 +65,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".activities.YoutuberActivity">
+        <activity android:name=".activities.YoutuberView">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
