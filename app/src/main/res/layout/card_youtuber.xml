@@ -22,13 +22,13 @@
         android:padding="16dp">
 
 
-
         <ImageView
             android:id="@+id/displayImage"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            app:srcCompat="@mipmap/person_red_icon_2_foreground"
             android:contentDescription="@string/change_youtuber_image" />
 
         <LinearLayout
