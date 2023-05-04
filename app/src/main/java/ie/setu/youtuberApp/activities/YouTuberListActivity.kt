@@ -65,6 +65,23 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(), this)
 
+        // Code resource used to help with toggle button functionality: https://www.geeksforgeeks.org/togglebutton-in-kotlin/
+        val filterToggle = findViewById<ToggleButton>(R.id.toggleButton)
+        filterToggle.setOnCheckedChangeListener { _, isChecked ->
+            filterYoutubers = if (isChecked) {
+                // Show favourite YouTubers only
+                onButtonClick(youtuber)
+                val filteredList = app.youtubers.findAll().filter { it.isFavouriteYoutuber } as ArrayList<YoutuberModel>
+                YoutuberAdapter(filteredList, this@YouTuberListActivity)
+            } else {
+                // Show ALL YouTubers
+                YoutuberAdapter(app.youtubers.findAll(), this@YouTuberListActivity)
+            }
+            youtuberRV.adapter = filterYoutubers
+        }
+
+
+
 
     }
 
@@ -150,16 +167,11 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
             R.id.item_logout -> {
 
-                FirebaseAuth.getInstance().signOut();
+                FirebaseAuth.getInstance().signOut()
 
                 val launcherIntent = Intent(this, SignInActivity::class.java)
                 getResult.launch(launcherIntent)
             }
-
-//            R.id.item_filter -> {
-//                Timber.i("Filter Button Pressed")
-//                app.youtubers.filter(youtuber.isFavouriteYoutuber)
-//            }
         }
 
         return super.onOptionsItemSelected(item)
