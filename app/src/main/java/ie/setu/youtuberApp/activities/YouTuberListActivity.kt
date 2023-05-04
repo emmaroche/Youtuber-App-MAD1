@@ -24,8 +24,6 @@ import ie.setu.youtuberApp.main.MainApp
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber
 
-
-
 class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
     private lateinit var app: MainApp
@@ -53,7 +51,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         youtuberList = ArrayList()
 
-        // initializing adapter for filtering
+        // initialising adapter for filtering
         filterYoutubers = YoutuberAdapter(youtuberList, this)
 
         // setting adapter to recycler view.
@@ -66,6 +64,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(), this)
+
 
     }
 
@@ -90,13 +89,13 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val filteredList = ArrayList<YoutuberModel>()
+                filteredList.clear()
                 app.youtubers.findAll().forEach {
                     if (it.name.contains(newText.orEmpty(), true)) {
                         filteredList.add(it)
                     }
                 }
                 binding.recyclerView.adapter = YoutuberAdapter(filteredList, this@YouTuberListActivity)
-
                 return false
             }
 
@@ -166,14 +165,11 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         return super.onOptionsItemSelected(item)
     }
 
-
-
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-
                 (binding.recyclerView.adapter)?.notifyItemRangeChanged(
                     0,
                     app.youtubers.findAll().size
@@ -196,8 +192,6 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         Timber.i("After Favourite Button Pressed, isFavouriteYouTuber = ${youtuber.isFavouriteYoutuber}")
     }
-
-
 
     @SuppressLint("NotifyDataSetChanged")
     private val getClickResult =

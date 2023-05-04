@@ -14,6 +14,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import ie.setu.youtuberApp.R
 import ie.setu.youtuberApp.databinding.ActivityYoutuberBinding
@@ -23,6 +25,7 @@ import ie.setu.youtuberApp.models.Location
 import ie.setu.youtuberApp.models.YoutuberModel
 import timber.log.Timber.i
 import java.util.*
+
 
 class YoutuberView : AppCompatActivity() {
 
@@ -68,30 +71,68 @@ class YoutuberView : AppCompatActivity() {
                 .into(binding.youtuberImage)
         }
 
+        val db = FirebaseFirestore.getInstance()
+        val youtuberRef = db.collection("youtubers")
+        youtuberRef.whereEqualTo("id", youtuber.id.toString()).get()
+
+
         binding.btnAdd.setOnClickListener {
+
             youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
             youtuber.youtuberRating = binding.youtuberRating.value
             youtuber.dob = binding.datePickerButton.text.toString()
 
-            if (youtuber.name.isEmpty()) {
-                Snackbar.make(it, R.string.error_Text, Snackbar.LENGTH_LONG)
-                    .show()
+            // Code resources used to store data in Firebase: https://www.youtube.com/watch?v=5UEdyUFi_uQ and https://ansarali-edugaon.medium.com/how-to-add-data-on-firebase-firestore-in-kotlin-android-fe114070d550
 
+            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+            // Create a map of the YouTuber's data
+            val data: MutableMap<String, Any> = HashMap()
+            data["name"] = youtuber.name
+            data["channelName"] = youtuber.channelName
+            data["rating"] = youtuber.youtuberRating
+            data["dob"] = youtuber.dob
+            data["userId"] = userId
+
+            if (youtuber.name.isEmpty()) {
+                Snackbar.make(it, R.string.error_Text, Snackbar.LENGTH_LONG).show()
             } else {
                 if (edit) {
-                    app.youtubers.update(youtuber.copy())
-                    i("Edit Button Pressed: $youtuber")
-                    setResult(RESULT_OK)
-                    finish()
+                    // Update existing YouTuber in the App and Firestore
+                    youtuberRef.document(youtuber.id.toString())
+                        .set(data)
+                        .addOnSuccessListener {
+                            app.youtubers.update(youtuber.copy())
+                            i("Edit Button Pressed: $youtuber")
+                            setResult(RESULT_OK)
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                applicationContext,
+                                "Error updating document: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                 } else {
-                    app.youtubers.create(youtuber.copy())
-                    i("Add Button Pressed: $youtuber")
-                    setResult(RESULT_OK)
-                    finish()
+                    // Add  YouTuber to the App and Firestore
+                    youtuberRef.add(data)
+                        .addOnSuccessListener {
+                            app.youtubers.create(youtuber.copy())
+                            i("Add Button Pressed: $youtuber")
+                            setResult(RESULT_OK)
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                applicationContext,
+                                "Error adding document: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                 }
             }
-
         }
 
         binding.chooseImage.setOnClickListener {
@@ -114,7 +155,6 @@ class YoutuberView : AppCompatActivity() {
         registerMapCallback()
 
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_add_youtuber, menu)
