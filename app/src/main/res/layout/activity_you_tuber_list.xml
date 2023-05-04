@@ -23,6 +23,16 @@
             android:layout_height="wrap_content"
             app:titleTextColor="@color/colorPrimary" />
 
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOn="@string/show_all_youtubers"
+            android:textOff="@string/show_favourite_youtubers"
+            android:padding="16dp"
+            android:background="#ffffff"
+            android:layout_gravity="center_horizontal"/>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,7 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

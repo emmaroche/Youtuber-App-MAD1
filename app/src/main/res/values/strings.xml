@@ -45,5 +45,7 @@
     <string name="already_registered_sign_in">Already Registered ? Sign In !</string>
     <string name="my_image_description">Image</string>
     <string name="menu_log_out">Log Out</string>
+    <string name="show_favourite_youtubers">Show Favourite YouTubers</string>
+    <string name="show_all_youtubers">Show ALL YouTubers</string>
 
 </resources>
