@@ -1,25 +1,34 @@
 # Youtuber-App-MAD1
 
-Assignment 1 for Mobile App Development 1
+Assignment for Mobile App Development 1
 
 ## App Overview
 
-My android mobile app is called the YouTuber App. The YouTuber App offers a way for users to store information about their favourite YouTubers, like their name, channel name, date of birth, an image, and a rating. This app lets a user add, list, update, and delete YouTubers.
+My Android Mobile Application is called the YouTuber App. This app offers a way for users to store information about their favourite YouTubers such as their name, channel name, date of birth, an image of them, their work location via Google Maps and a rating. 
+
+I developed this app using Kotlin and Android Studio by combining practical lab notes from class, self-learning, and independent research.
 
 ## App Functionality
 
-- Add YouTubers with information including their name, channel name, date of birth, image and rating
-- List YouTubers
-- Edit YouTubers
-- Delete YouTubers
-- Mark YouTubers as favourite and have a filter result of only the favourited YouTubers in the logcat
-- Updated/Improved UI and colour scheme
+**Functionality added in Assignment 1:**
 
-## Package Structure
+- YouTubers can be added with information including their name, channel name, date of birth, image and rating
+- YouTubers are listed via a RecyclerView on the main page activity
+- YouTubers information can be edited/updated
+- YouTubers can be deleted
+- Mark YouTubers as favourite 
 
-The following package structure was followed:
+**Functionality added in Assignment 2:**
 
-<img width="428" alt="Screenshot 2023-03-05 at 14 43 05" src="https://user-images.githubusercontent.com/78028777/222967346-389994a6-7af0-4f2a-9602-6affe1acaf46.png">
+- Login and Sign Up activity screens were added with Firebase Authentication (users are stored in Firebase)
+- Map feature added i.e. when adding a YouTuber a user can now add their work location 
+- ALL YouTuber locations are displayed and can be viewed on map also
+- All YouTubers can be deleted at the same time (A warning message to ask if the user is sure they want to delete the YouTuber(s) pops up beforehand now)
+- YouTubers can be searched by name
+- Animated Splash Screen added on app launch
+- A filter toggle button was added that will only show the YouTubers marked as Favourite
+- Added a feature so a user can now switch the app theme between Night and Day mode as they please
+- YouTuber information is persisted with JSON and also stored in the Firebase Firestore Cloud Database
 
 ## GitHub workflow
 
@@ -31,7 +40,7 @@ _Issue - Branch - Commit(s) - Push - Pull Request - Merge - Close Issue - Delete
 
 **Colour Theme**
 
-The colour theme of this app is simply red, white and black. This was an obvious colour choice as the known colours that represent YouTube are red and white so these colours were chosen to keep a familiar YouTube theme going with this app.
+The colour theme of this app is simply red, white and black. As YouTube is associated with red, white, and black, these colors were chosen to maintain a familiar YouTube theme.
 
 **App Screens**
 
@@ -46,10 +55,14 @@ Home Screen (with YouTubers added)
 
 ## References
 
-To assist me in adding some of the app’s features, I found the following resources. These resources were incorporated into my app and were adjusted/troubleshooted appropriately to fit the content and layout of my app:
+To assist me in adding some of the app’s features, I found and used the following resources. These resources were incorporated into my app and were modified/troubleshooted appropriately to fit the content and layout of my app:
+
+**Assignment 1 References:**
 
 Resource used to help with adding a NumberPicker: https://tutorialwing.com/android-numberpicker-using-kotlin-with-example/ 
 
 Resource used to help with adding the date/calendar picker and drop-down feature: https://www.youtube.com/watch?v=qCoidM98zNk&t=28s
 
 Resource used to help with adding a clickable favourite icon to the listed cards: https://stackoverflow.com/questions/34259618/android-using-imageview-onclick-to-change-image-back-and-forth & https://stackoverflow.com/questions/11604476/it-is-possible-to-create-a-togglebutton-without-text
+
+**Assignment 2 References:**
