@@ -76,8 +76,8 @@ class YoutuberMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val youtuber = marker.tag as YoutuberModel
-        contentBinding.currentYoutuberName.text = youtuber.name
         contentBinding.currentChannelName.text = youtuber.channelName
+        contentBinding.currentYoutuberName.text = youtuber.name
         Picasso.get().load(youtuber.youtuberImage).into(contentBinding.imageView2)
         return false
     }

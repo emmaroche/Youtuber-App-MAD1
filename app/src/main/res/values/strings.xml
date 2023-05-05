@@ -4,17 +4,17 @@
     <string name="button_saveYoutuber">Save YouTuber</string>
     <string name="button_addYoutuberImage">Add Image</string>
     <string name="hint_youtuberName">YouTuber Name</string>
-    <string name="hint_youtuberChannelName">YouTuber Channel Name</string>
+    <string name="hint_youtuberChannelName">YouTuber Channel Name *</string>
     <string name="menu_addYouTuber">Add</string>
     <string name="menu_deleteYoutuber">Delete</string>
     <string name="menu_cancelAdd">Cancel</string>
-    <string name="error_Text">Please enter a YouTubers name</string>
-    <string name="add_Image_Text">Add YouTuber Image</string>
-    <string name="add_DOB_Text">Add YouTuber Date of Birth</string>
+    <string name="error_Text">Please enter a YouTubers Channel Name</string>
+    <string name="add_Image_Text">Add Photo of this YouTuber</string>
+    <string name="add_DOB_Text">YouTuber\'s Date of Birth</string>
     <string name="select_youtuber_image">Select YouTuber image</string>
     <string name="change_youtuber_image">Change YouTuber image</string>
     <string name="display_youtuber_image">YouTuber image</string>
-    <string name="youtuber_information">YouTuber Information</string>
+    <string name="youtuber_information">YouTuber\'s Information</string>
     <string name="rate_youtuber">Rate this YouTuber (1 -10)</string>
     <string name="search_youtuber">Search</string>
     <string name="date_picker">Date Picker</string>
@@ -47,5 +47,7 @@
     <string name="menu_log_out">Log Out</string>
     <string name="show_favourite_youtubers">Show Favourite YouTubers</string>
     <string name="show_all_youtubers">Show ALL YouTubers</string>
+    <string name="add_youtubers_work_location">YouTuber\'s Work Location</string>
+    <string name="see_all_youtubers_on_map">See ALL YouTubers on Map</string>
 
 </resources>

@@ -40,8 +40,8 @@ class YoutuberAdapter constructor(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
-            binding.youtuberName.text = youtuber.name
             binding.youtuberChannelName.text = youtuber.channelName
+            binding.youtuberName.text = youtuber.name
             binding.youtuberRating.text = youtuber.youtuberRating.toString()
             binding.youtuberDobText.text = youtuber.dob
             Picasso.get()
