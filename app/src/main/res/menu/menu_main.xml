@@ -12,7 +12,7 @@
     <item
         android:id="@+id/item_map"
         android:icon="@drawable/baseline_map_24"
-        android:title="See ALL YouTubers on Map"
+        android:title="@string/see_all_youtubers_on_map"
         app:showAsAction="ifRoom" />
 
     <item

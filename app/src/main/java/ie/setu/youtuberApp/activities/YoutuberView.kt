@@ -60,8 +60,8 @@ class YoutuberView : AppCompatActivity() {
         if (intent.hasExtra("youtuber_edit")) {
             edit = true
             youtuber = intent.extras?.getParcelable("youtuber_edit")!!
-            binding.youtuberName.setText(youtuber.name)
             binding.youtuberChannelName.setText(youtuber.channelName)
+            binding.youtuberName.setText(youtuber.name)
             binding.youtuberRating.value = youtuber.youtuberRating
             binding.datePickerButton.text = youtuber.dob
             binding.btnAdd.setText(R.string.button_saveYoutuber)
@@ -77,9 +77,8 @@ class YoutuberView : AppCompatActivity() {
 
 
         binding.btnAdd.setOnClickListener {
-
-            youtuber.name = binding.youtuberName.text.toString()
             youtuber.channelName = binding.youtuberChannelName.text.toString()
+            youtuber.name = binding.youtuberName.text.toString()
             youtuber.youtuberRating = binding.youtuberRating.value
             youtuber.dob = binding.datePickerButton.text.toString()
 
@@ -95,7 +94,7 @@ class YoutuberView : AppCompatActivity() {
             data["dob"] = youtuber.dob
             data["userId"] = userId
 
-            if (youtuber.name.isEmpty()) {
+            if (youtuber.channelName.isEmpty()) {
                 Snackbar.make(it, R.string.error_Text, Snackbar.LENGTH_LONG).show()
             } else {
                 if (edit) {
@@ -166,15 +165,15 @@ class YoutuberView : AppCompatActivity() {
         when (item.itemId) {
             R.id.item_delete -> {
 
-                // Code resource used to help: https://www.javatpoint.com/kotlin-android-alertdialog
+                // Code resource used to help with delete all: https://www.javatpoint.com/kotlin-android-alertdialog
                 val builder = AlertDialog.Builder(this)
-                //set title for alert dialog
+                // Set title for alert dialog
                 builder.setTitle(R.string.dialogTitle)
-                //set message for alert dialog
+                // Set message for alert dialog
                 builder.setMessage(R.string.dialogMessage)
                 builder.setIcon(R.drawable.baseline_warning)
 
-                //yes option selected
+                // Yes option selected
                 builder.setPositiveButton("Yes") { _, _ ->
                     Toast.makeText(applicationContext, "YouTuber Deleted", Toast.LENGTH_LONG).show()
                     i("Delete Button Pressed: $youtuber")
@@ -184,7 +183,7 @@ class YoutuberView : AppCompatActivity() {
                     finish()
                 }
 
-                //cancel option selected
+                // Cancel option selected
                 builder.setNegativeButton("Cancel") { _, _ ->
                     Toast.makeText(applicationContext, "Delete Cancelled", Toast.LENGTH_LONG).show()
                 }
