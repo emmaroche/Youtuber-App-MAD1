@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Switch
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,10 +42,36 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             ActivityResultContracts.StartActivityForResult()
         )    { }
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityYouTuberListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        // Code Resource to help add a change to Night Mode switch: https://www.youtube.com/watch?v=6toOIUQqy-Q&list=LL&index=1
+        val switch: Switch = findViewById(R.id.switchMode)
+
+        // Sets the initial state of the switch based on current theme
+        switch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+
+// Store the current text of the switch
+        var switchText = if (switch.isChecked) "Change theme to Day Mode" else "Change theme to Night Mode"
+        switch.text = switchText
+
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                switchText = "Change theme to Day Mode"
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                switchText = "Change theme to Night Mode"
+            }
+            switch.text = switchText
+            // Apply the day/night mode using applyDayNight() method
+            delegate.applyDayNight()
+        }
+
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
@@ -80,6 +108,8 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             }
             youtuberRV.adapter = filterYoutubers
         }
+
+
 
     }
 
