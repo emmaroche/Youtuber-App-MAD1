@@ -23,6 +23,14 @@
             android:layout_height="wrap_content"
             app:titleTextColor="@color/colorPrimary" />
 
+
+        <Switch
+            android:id="@+id/switchMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:padding="16dp" />
+
         <ToggleButton
             android:id="@+id/toggleButton"
             android:layout_width="match_parent"
@@ -30,8 +38,10 @@
             android:textOn="@string/show_all_youtubers"
             android:textOff="@string/show_favourite_youtubers"
             android:padding="16dp"
-            android:background="#ffffff"
-            android:layout_gravity="center_horizontal"/>
+            android:background="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/black" />
+
 
 
     </com.google.android.material.appbar.AppBarLayout>
