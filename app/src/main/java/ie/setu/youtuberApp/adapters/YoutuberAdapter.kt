@@ -29,11 +29,14 @@ class YoutuberAdapter constructor(
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val youtuber = youtubers[holder.adapterPosition]
         holder.bind(youtuber, listener)
+
+        // Sets the state of the toggle button based on the YoutuberModel
+        holder.binding.chooseFav.isChecked = youtuber.isFavouriteYoutuber
     }
 
     override fun getItemCount(): Int = youtubers.size
 
-    class MainHolder(private val binding: CardYoutuberBinding) :
+    class MainHolder(val binding: CardYoutuberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(youtuber: YoutuberModel, listener: YoutuberListener) {
