@@ -80,7 +80,7 @@ Night Mode Enabled
 
 To assist me in adding some of the app’s features, I found and used the following resources. These resources were incorporated into my app and were modified/troubleshooted appropriately to fit the content and layout of my app:
 
-**Assignment 1 References:**
+#### Assignment 1 References:
 
 Resource used to help with adding a NumberPicker: https://tutorialwing.com/android-numberpicker-using-kotlin-with-example/ 
 
@@ -88,7 +88,7 @@ Resource used to help with adding the date/calendar picker and drop-down feature
 
 Resource used to help with adding a clickable favourite icon to the listed cards: https://stackoverflow.com/questions/34259618/android-using-imageview-onclick-to-change-image-back-and-forth & https://stackoverflow.com/questions/11604476/it-is-possible-to-create-a-togglebutton-without-text
 
-**Assignment 2 References:**
+#### Assignment 2 References:
 
 Resource used to assist in creating login & sign-up functionality: https://www.youtube.com/watch?v=idbxxkF1l6k&list=WL&index=39&t=35s 
 
