@@ -51,10 +51,9 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
 
         youtuberList = ArrayList()
 
-        // initialising adapter for filtering
         filterYoutubers = YoutuberAdapter(youtuberList, this)
 
-        // setting adapter to recycler view.
+        // Setting adapter to recycler view.
         youtuberRV.adapter = filterYoutubers
 
         filterYoutubers.notifyDataSetChanged()
@@ -65,13 +64,15 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = YoutuberAdapter(app.youtubers.findAll(), this)
 
-        // Code resource used to help with toggle button functionality: https://www.geeksforgeeks.org/togglebutton-in-kotlin/
+        // Code resource used to help with toggle button filtering: https://www.geeksforgeeks.org/togglebutton-in-kotlin/ & https://stackoverflow.com/questions/44098709/how-can-i-filter-an-arraylist-in-kotlin-so-i-only-have-elements-which-match-my-c
+        // Code has been significantly modified to work within the YouTuber app
+
         val filterToggle = findViewById<ToggleButton>(R.id.toggleButton)
+
         filterToggle.setOnCheckedChangeListener { _, isChecked ->
             filterYoutubers = if (isChecked) {
                 // Show favourite YouTubers only
-                onButtonClick(youtuber)
-                val filteredList = app.youtubers.findAll().filter { it.isFavouriteYoutuber } as ArrayList<YoutuberModel>
+                val filteredList = app.youtubers.findAll().filter { it.isFavouriteYoutuber }
                 YoutuberAdapter(filteredList, this@YouTuberListActivity)
             } else {
                 // Show ALL YouTubers
@@ -80,16 +81,13 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             youtuberRV.adapter = filterYoutubers
         }
 
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
-        //A resource shared to me after assignment 1 was used to help me add searching functionality
-        //Code has been significantly modified to work within the YouTuber app
-        //resource: https://www.geeksforgeeks.org/android-searchview-with-recyclerview-using-kotlin/
+        // A resource shared to me after assignment 1 was used to help me add searching functionality
+        // Code has been significantly modified to work within the YouTuber app
+        // resource: https://www.geeksforgeeks.org/android-searchview-with-recyclerview-using-kotlin/
 
         val inflater = menuInflater
 
@@ -211,7 +209,7 @@ class YouTuberListActivity : AppCompatActivity(), YoutuberListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                //Log messages to check if youtuber item is updated and/or deleted if delete or update buttons are clicked
+                // Log messages to check if youtuber item is updated and/or deleted if delete or update buttons are clicked
                 Timber.i("Get Clicked Button Pressed ${app.youtubers.findAll()}")
 
                 (binding.recyclerView.adapter)?.notifyDataSetChanged()
